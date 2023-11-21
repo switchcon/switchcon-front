@@ -34,5 +34,6 @@ module.exports = {
 		'@typescript-eslint/explicit-function-return-type': 'off', //typeScript에서 함수의 반환 유형을 명시적으로 지정하지 않도록 허용
 		'no-undef': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
 	},
 };
