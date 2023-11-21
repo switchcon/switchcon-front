@@ -2,7 +2,7 @@ import Footer from '@components/ui/Footer';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
-
+import { FaCirclePlus } from 'react-icons/fa6';
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -67,6 +67,9 @@ const Home = () => {
 				</div>
 			</main>
 			<Footer />
+			<button className='w-[375px] fixed bottom-20 left-[300px]'>
+				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
+			</button>
 		</>
 	);
 };
