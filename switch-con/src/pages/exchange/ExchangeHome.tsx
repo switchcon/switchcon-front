@@ -3,6 +3,8 @@ import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
 import { FaCirclePlus } from 'react-icons/fa6';
+import { FaCommentAlt } from 'react-icons/fa';
+
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -60,12 +62,22 @@ const ExchangeHome = () => {
 			</Header>
 			<main className='px-6 pt-16'>
 				<div className='flex items-end justify-between mb-4'>
-					<p className='font-semibold'>내 기프티콘</p>
+					<p className='font-semibold'>교환 게시물</p>
 					<p className='text-xs'>유효기간 임박순</p>
 				</div>
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
-						return <GiftCard key={gifticon.exchangePost_id} gifticon={gifticon} />;
+						return (
+							<GiftCard key={gifticon.exchangePost_id} gifticon={gifticon}>
+								<div className='flex items-center justify-between'>
+									<div className='font-semibold'>약 {gifticon.price}원 </div>
+									<div className='flex items-center gap-2'>
+										<FaCommentAlt className='text-brand-primary-light' size={'18'} />
+										{gifticon.exchangeReq_count}
+									</div>
+								</div>
+							</GiftCard>
+						);
 					})}
 				</div>
 			</main>

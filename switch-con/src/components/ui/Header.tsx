@@ -8,8 +8,8 @@ interface HeaderProps {
 const Header = ({ headline, navigaterOff, children }: HeaderProps) => {
 	return (
 		<>
-			<header className='fixed bg-white w-[375px] shadow-sm '>
-				<div className='w-full flex justify-between flex-row pl-2 py-3 items-center'>
+			<header className='fixed bg-white w-[375px] shadow-sm z-50'>
+				<div className='flex flex-row items-center justify-between w-full py-3 pl-2'>
 					{navigaterOff === undefined && <SlArrowLeft size='20' />}
 					<div className='mx-2 text-lg font-bold'>{headline}</div>
 					<div className='flex'>{children}</div>
