@@ -1,8 +1,28 @@
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 
-const GiftCard = ({ gifticon, children }: { gifticon: any; children?: React.ReactNode }) => {
+const GiftCard = ({
+	gifticon,
+	children,
+	hoverOff,
+}: {
+	gifticon: any;
+	children?: React.ReactNode;
+	hoverOff?: boolean;
+}) => {
+	const containerClassName = `
+    w-full 
+    ${hoverOff ? '' : 'hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0'} 
+    bg-white 
+    rounded-md 
+    px-4 
+    py-3 
+    flex 
+    gap-2 
+    shadow-md
+  `;
+
 	return (
-		<section className='hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0 bg-white rounded-md px-4 py-3 flex gap-2 shadow-md'>
+		<section className={containerClassName}>
 			<div className='w-2/5 mr-2 overflow-hidden rounded-md'>
 				<AspectRatio.Root ratio={1 / 1}>
 					<img src={gifticon.gifticon_img} className='object-cover w-full h-full' />
