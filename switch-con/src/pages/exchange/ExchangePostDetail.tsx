@@ -26,7 +26,7 @@ const ExchangePostDetail = () => {
 	return (
 		<>
 			<Header headline={'교환 기프티콘 상세'} />
-			<main className='px-6 pt-16 '>
+			<main className='px-6 pt-16 pb-4'>
 				<div className='mt-2 mb-2 text-lg font-semibold'> {giftcons.product} 어쩌구 교환권</div>
 				<div className='w-full mr-2 overflow-hidden rounded-md'>
 					<AspectRatio.Root ratio={1 / 1}>
@@ -61,11 +61,23 @@ const ExchangePostDetail = () => {
 						</div>
 					</div>
 				</article>
-				<article className='mt-5'>
+				<article className='relative mt-5'>
 					<div className='py-2 '>
 						<p className='mb-3 font-bold text-medium'>현재까지 교환신청 목록</p>
 						<hr className='mb-2' />
-						<GiftCard gifticon={giftcons} hoverOff />
+						<div className='relative flex flex-col gap-2'>
+							<button className='w-3/6 translate-x-40 z-50 sticky top-[600px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
+								교환 신청
+							</button>
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+							<GiftCard gifticon={giftcons} hoverOff />
+						</div>
 					</div>
 				</article>
 			</main>
