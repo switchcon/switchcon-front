@@ -4,6 +4,7 @@ import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { FaCommentAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const giftcons = [
 	{
@@ -68,15 +69,17 @@ const ExchangeHome = () => {
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
 						return (
-							<GiftCard key={gifticon.exchangePost_id} gifticon={gifticon}>
-								<div className='flex items-center justify-between'>
-									<div className='font-semibold'>약 {gifticon.price}원 </div>
-									<div className='flex items-center gap-2'>
-										<FaCommentAlt className='text-brand-primary-light' size={'18'} />
-										{gifticon.exchangeReq_count}
+							<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
+								<GiftCard gifticon={gifticon}>
+									<div className='flex items-center justify-between'>
+										<div className='font-semibold'>약 {gifticon.price}원 </div>
+										<div className='flex items-center gap-2'>
+											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
+											{gifticon.exchangeReq_count}
+										</div>
 									</div>
-								</div>
-							</GiftCard>
+								</GiftCard>
+							</Link>
 						);
 					})}
 				</div>
