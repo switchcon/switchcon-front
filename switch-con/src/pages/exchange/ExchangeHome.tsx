@@ -66,19 +66,15 @@ const ExchangeHome = () => {
 					<p className='font-semibold'>교환 게시물</p>
 					<p className='text-xs'>유효기간 임박순</p>
 				</div>
-				<div className='flex flex-col gap-2'>
+				<div className='flex flex-col'>
 					{giftcons.map((gifticon) => {
 						return (
 							<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
-								<GiftCard gifticon={gifticon}>
-									<div className='flex items-center justify-between'>
-										<div className='font-semibold'>약 {gifticon.price}원 </div>
-										<div className='flex items-center gap-2'>
-											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
-											{gifticon.exchangeReq_count}
-										</div>
-									</div>
-								</GiftCard>
+								<GiftCard gifticon={gifticon} />
+								<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
+									<FaCommentAlt className='text-brand-primary-light' size={'18'} />
+									{gifticon.exchangeReq_count}
+								</div>
 							</Link>
 						);
 					})}

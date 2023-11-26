@@ -34,7 +34,8 @@ const GiftCard = ({
 					{gifticon.category}/{gifticon.store}
 				</p>
 				<p className='text-sm font-semibold text-green-950'>{gifticon.expiration_date}</p>
-				<p>{children}</p>
+				<p className='text-sm font-semibold text-green-800'>약 {gifticon.price} 원</p>
+				<div>{children}</div>
 			</div>
 		</section>
 	);
