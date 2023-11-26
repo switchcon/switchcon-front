@@ -25,10 +25,10 @@ const ExchangePostDetail = () => {
 	return (
 		<>
 			<Header headline={'교환 기프티콘 상세'} />
-			<main className='px-6 pt-16'>
-				<div className='font-semibold'> {giftcons.product}</div>
-				<div className='w-2/5 mr-2 overflow-hidden rounded-md'>
-					<AspectRatio.Root ratio={16 / 9}>
+			<main className='flex flex-col items-center px-6 pt-16'>
+				<div className='mt-2 mb-2 font-semibold'> {giftcons.product}</div>
+				<div className='w-full mr-2 overflow-hidden rounded-md'>
+					<AspectRatio.Root ratio={1 / 1}>
 						<img src={giftcons.gifticon_img} className='object-cover w-full h-full' />
 					</AspectRatio.Root>
 				</div>
