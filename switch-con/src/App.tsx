@@ -1,5 +1,6 @@
 import ExchangeHome from '@pages/exchange/ExchangeHome';
 import ExchangePostDetail from '@pages/exchange/ExchangePostDetail';
+import ExchangeRequest from '@pages/exchange/ExchangeRequest';
 import Home from '@pages/mainPage/Home';
 import Landing from '@pages/mainPage/Landing';
 import { Route, Routes } from 'react-router-dom';
@@ -11,6 +12,7 @@ const App = () => {
 			<Route path='/home' element={<Home />} />
 			<Route path='/exchange-home' element={<ExchangeHome />} />
 			<Route path='/exchange/:id' element={<ExchangePostDetail />} />
+			<Route path='/exchange-request/:id' element={<ExchangeRequest />} />
 		</Routes>
 	);
 };
