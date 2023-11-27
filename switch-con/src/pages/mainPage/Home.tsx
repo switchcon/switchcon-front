@@ -67,7 +67,7 @@ const Home = () => {
 				</div>
 			</main>
 			<Footer selectedMenu='home' />
-			<button className='w-[375px] fixed bottom-20 left-[300px]'>
+			<button className='w-[375px] fixed bottom-20 translate-x-72'>
 				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
 			</button>
 		</>

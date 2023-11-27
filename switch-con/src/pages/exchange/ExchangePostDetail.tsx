@@ -66,7 +66,7 @@ const ExchangePostDetail = () => {
 						<p className='mb-3 font-bold text-medium'>현재까지 교환신청 목록</p>
 						<hr className='mb-2' />
 						<div className='relative flex flex-col gap-2'>
-							<button className='w-3/6 translate-x-40 z-48 sticky top-[600px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
+							<button className='w-3/6 translate-x-40 z-48 sticky top-[700px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
 								<Link to={`/exchange-request/${giftcons.exchangePost_id}`}>교환 신청</Link>
 							</button>
 							<GiftCard gifticon={giftcons} hoverOff />
