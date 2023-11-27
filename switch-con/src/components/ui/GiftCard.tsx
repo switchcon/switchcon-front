@@ -4,14 +4,19 @@ const GiftCard = ({
 	gifticon,
 	children,
 	hoverOff,
+	onClick,
+	selected,
 }: {
 	gifticon: any;
 	children?: React.ReactNode;
 	hoverOff?: boolean;
+	onClick?: (event: React.MouseEvent) => void;
+	selected?: boolean;
 }) => {
 	const containerClassName = `
     w-full 
     ${hoverOff ? '' : 'hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0'} 
+		${selected ? 'ring ring-[#44CD81] ring-offset-0' : ''}
     bg-white 
     rounded-md 
     px-4 
@@ -19,10 +24,11 @@ const GiftCard = ({
     flex 
     gap-2 
     shadow-md
+		cursor-pointer
   `;
 
 	return (
-		<section className={containerClassName}>
+		<section className={containerClassName} onClick={onClick}>
 			<div className='w-2/5 mr-2 overflow-hidden rounded-md'>
 				<AspectRatio.Root ratio={1 / 1}>
 					<img src={gifticon.gifticon_img} className='object-cover w-full h-full' />

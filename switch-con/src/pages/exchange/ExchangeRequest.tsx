@@ -1,5 +1,7 @@
+'use client';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
+import { useState } from 'react';
 
 const giftcons = [
 	{
@@ -45,7 +47,7 @@ const giftcons = [
 		modfied_at: '2023-11-24',
 	},
 	{
-		exchangePost_id: 3,
+		exchangePost_id: 4,
 		gifticon_img: '/images/image_url_3.jpg',
 		category: '푸드',
 		store: '피자헛',
@@ -60,6 +62,8 @@ const giftcons = [
 	},
 ];
 const ExchangeRequest = () => {
+	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
+
 	return (
 		<div className='pb-6 '>
 			<Header headline='기프티콘 교환 요청' />
@@ -70,14 +74,22 @@ const ExchangeRequest = () => {
 				<form className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
 						return (
-							<GiftCard key={gifticon.exchangePost_id} gifticon={gifticon}>
-								<input type='radio' value={gifticon.exchangePost_id.toString()} />
+							<GiftCard
+								key={gifticon.exchangePost_id}
+								gifticon={gifticon}
+								onClick={() => setSelectedGiftIcon(gifticon.exchangePost_id)}
+								selected={selectedGiftIcon === gifticon.exchangePost_id}
+							>
+								<input type='radio' value={gifticon.exchangePost_id.toString()} hidden />
 							</GiftCard>
 						);
 					})}
 				</form>
 			</main>
-			<button className='fixed bottom-2 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
+			<button
+				type='submit'
+				className='fixed bottom-2 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
+			>
 				교환 신청
 			</button>
 			{/*교환신청 로직 */}
