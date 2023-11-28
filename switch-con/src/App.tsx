@@ -1,5 +1,16 @@
+import ExchangeHome from '@pages/exchange/ExchangeHome';
+import Home from '@pages/mainPage/Home';
+import Landing from '@pages/mainPage/Landing';
+import { Route, Routes } from 'react-router-dom';
+
 const App = () => {
-	return <div className='text-4xl'>hello</div>;
+	return (
+		<Routes>
+			<Route path='/' element={<Landing />} />
+			<Route path='/home' element={<Home />} />
+			<Route path='/exchange-home' element={<ExchangeHome />} />
+		</Routes>
+	);
 };
 
 export default App;
