@@ -35,5 +35,6 @@ module.exports = {
 		'no-undef': 'off',
 		'@typescript-eslint/no-var-requires': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+		// 'react/prop-types': [2, { ignore: ['className'] }],
 	},
 };
