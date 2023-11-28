@@ -76,8 +76,8 @@ const MyExchange = () => {
 							{giftcons.map((gifticon) => {
 								return (
 									<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
-										<GiftCard gifticon={gifticon} />
-										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
+										<GiftCard exchanged={gifticon.status === 'exchanged'} gifticon={gifticon} />
+										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px] z-10'>
 											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
 											{gifticon.exchangeReq_count}
 										</div>
@@ -91,7 +91,8 @@ const MyExchange = () => {
 							{giftcons.map((gifticon) => {
 								return (
 									<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
-										<GiftCard gifticon={gifticon} />
+										<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'exchanged'} />{' '}
+										{/*교환완료의 경우 오버레이 */}
 										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
 											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
 											{gifticon.exchangeReq_count}

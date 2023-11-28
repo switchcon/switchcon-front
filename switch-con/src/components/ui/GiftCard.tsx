@@ -6,17 +6,20 @@ const GiftCard = ({
 	hoverOff,
 	onClick,
 	selected,
+	exchanged,
 }: {
 	gifticon: any;
 	children?: React.ReactNode;
 	hoverOff?: boolean;
 	onClick?: (event: React.MouseEvent) => void;
 	selected?: boolean;
+	exchanged?: boolean;
 }) => {
 	const containerClassName = `
     w-full 
     ${hoverOff ? '' : 'hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0'} 
 		${selected ? 'ring ring-[#44CD81] ring-offset-0' : ''}
+		
     bg-white 
     rounded-md 
     px-4 
@@ -25,6 +28,7 @@ const GiftCard = ({
     gap-2 
     shadow-md
 		cursor-pointer
+		relative
   `;
 
 	return (
@@ -43,6 +47,11 @@ const GiftCard = ({
 				<p className='text-sm font-semibold text-green-800'>약 {gifticon.price} 원</p>
 				<div>{children}</div>
 			</div>
+			{exchanged && (
+				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
+					<p className='text-lg font-bold'>교환완료</p>
+				</div>
+			)}
 		</section>
 	);
 };
