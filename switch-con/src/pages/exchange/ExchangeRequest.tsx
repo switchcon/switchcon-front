@@ -98,27 +98,28 @@ const ExchangeRequest = () => {
 				</form>
 			</main>
 			<AlertDialog>
-				<AlertDialogTrigger>Open</AlertDialogTrigger>
+				<AlertDialogTrigger>
+					<button
+						type='submit'
+						className='fixed bottom-2 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
+					>
+						교환 신청
+					</button>
+				</AlertDialogTrigger>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+						<AlertDialogTitle>선택한 기프티콘으로 교환신청 하시겠습니까?</AlertDialogTitle>
 						<AlertDialogDescription>
-							This action cannot be undone. This will permanently delete your account and remove your data from our
-							servers.
+							교환 신청한 기프티콘은 사용이 불가합니다. (단, 교환요청 취소 시 사용 가능)
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>Cancel</AlertDialogCancel>
-						<AlertDialogAction>Continue</AlertDialogAction>
+						<AlertDialogCancel>취소</AlertDialogCancel>
+						<AlertDialogAction>확인</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
-			<button
-				type='submit'
-				className='fixed bottom-2 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
-			>
-				교환 신청
-			</button>
+
 			{/*교환신청 로직 */}
 		</div>
 	);
