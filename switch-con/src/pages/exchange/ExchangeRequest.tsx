@@ -13,6 +13,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from '@components/ui/alert-dialog';
+import { Button } from '@components/ui/button';
 
 const giftcons = [
 	{
@@ -74,7 +75,11 @@ const giftcons = [
 ];
 const ExchangeRequest = () => {
 	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
-
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		// const response = await
+		console.log('Form submitted with gift icon:', selectedGiftIcon);
+	};
 	return (
 		<div className='pb-6 '>
 			<Header headline='기프티콘 교환 요청' />
@@ -82,7 +87,7 @@ const ExchangeRequest = () => {
 				<div className='flex items-end justify-between mb-4'>
 					<p className='font-semibold'>내 기프티콘</p>
 				</div>
-				<form className='flex flex-col gap-2'>
+				<form onSubmit={handleSubmit} id='exchange_request' className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
 						return (
 							<GiftCard
@@ -99,10 +104,7 @@ const ExchangeRequest = () => {
 			</main>
 			<AlertDialog>
 				<AlertDialogTrigger>
-					<button
-						type='submit'
-						className='fixed bottom-2 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
-					>
+					<button className='fixed bottom-4 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
 						교환 신청
 					</button>
 				</AlertDialogTrigger>
@@ -115,7 +117,11 @@ const ExchangeRequest = () => {
 					</AlertDialogHeader>
 					<AlertDialogFooter>
 						<AlertDialogCancel>취소</AlertDialogCancel>
-						<AlertDialogAction>확인</AlertDialogAction>
+						<AlertDialogAction asChild>
+							<Button type='submit' form='exchange_request'>
+								확인
+							</Button>
+						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
