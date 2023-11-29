@@ -1,3 +1,4 @@
+/* eslint-disable */ //warning 무시
 import React from 'react';
 
 const ExchangeHome = () => {

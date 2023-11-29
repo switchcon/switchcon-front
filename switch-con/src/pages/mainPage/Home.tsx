@@ -1,8 +1,14 @@
+// eslint-disable-next-line
+/* eslint-disable */ //warning 무시
 import Footer from '@components/ui/Footer';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
 import { FaCirclePlus } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
+import { getHome } from '../../apis/getHome';
+import { Button } from '@components/ui/button';
+import axios from 'axios';
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -49,8 +55,21 @@ const giftcons = [
 ];
 
 const Home = () => {
+	const [data, setData] = useState();
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		getHome().then((res) => {
+			// setData(res);
+			setLoading(false);
+		});
+	}, []);
+
+	if (false) return <div>로딩중..</div>;
 	return (
 		<>
+			{/* <div>{data}</div>
+			<div>{data}</div> */}
 			<Header headline='스위치콘' navigaterOff>
 				<IoIosSearch size={'20'} />
 				<IoMdNotificationsOutline size={'20'} className='ml-3 mr-4' />

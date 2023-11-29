@@ -1,3 +1,4 @@
+/* eslint-disable */ //warning 무시
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 
 const GiftCard = ({ gifticon }: { gifticon: any }) => {

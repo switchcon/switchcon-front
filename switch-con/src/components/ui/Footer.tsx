@@ -1,3 +1,4 @@
+/* eslint-disable */ //warning 무시
 import { RiHome2Line } from 'react-icons/ri';
 import { GiCardExchange } from 'react-icons/gi';
 import { FaRegUser } from 'react-icons/fa';

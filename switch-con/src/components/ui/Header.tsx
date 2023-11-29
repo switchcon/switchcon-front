@@ -1,3 +1,4 @@
+/* eslint-disable */ //warning 무시
 import { SlArrowLeft } from 'react-icons/sl';
 
 interface HeaderProps {
