@@ -6,6 +6,7 @@ import { FaCommentAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
+import { Badge } from '@components/ui/badge';
 
 const giftcons = [
 	{
@@ -22,7 +23,7 @@ const giftcons = [
 		created_at: '2023-11-22',
 		modfied_at: '2023-11-22',
 		exchangeReq_count: 3,
-		status: 'in_progress',
+		status: 'rejected',
 	},
 	{
 		exchangePost_id: 2,
@@ -38,7 +39,7 @@ const giftcons = [
 		created_at: '2023-11-23',
 		modfied_at: '2023-11-23',
 		exchangeReq_count: 4,
-		status: 'exchanged',
+		status: 'accepted',
 	},
 	{
 		exchangePost_id: 3,
@@ -54,10 +55,20 @@ const giftcons = [
 		created_at: '2023-11-24',
 		modfied_at: '2023-11-24',
 		exchangeReq_count: 6,
-		status: 'in_progress',
+		status: 'waiting',
 	},
 ];
 
+const post_status = {
+	in_progress: '진행중',
+	complete: '완료',
+	cancle: '취소',
+};
+const status = {
+	waiting: '대기중',
+	accepted: '수락됨',
+	rejected: '거절됨',
+};
 const MyExchange = () => {
 	return (
 		<>
@@ -76,7 +87,7 @@ const MyExchange = () => {
 							{giftcons.map((gifticon) => {
 								return (
 									<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
-										<GiftCard exchanged={gifticon.status === 'exchanged'} gifticon={gifticon} />
+										<GiftCard exchanged={gifticon.status === 'accepted'} gifticon={gifticon} />
 										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px] z-10'>
 											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
 											{gifticon.exchangeReq_count}
@@ -91,6 +102,7 @@ const MyExchange = () => {
 							{giftcons.map((gifticon) => {
 								return (
 									<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
+										<Badge>{status[gifticon.status]}</Badge>
 										<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'exchanged'} />{' '}
 										{/*교환완료의 경우 오버레이 */}
 										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
