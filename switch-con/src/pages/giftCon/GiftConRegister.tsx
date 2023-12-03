@@ -27,7 +27,7 @@ const category_list = {
 	beauty: '뷰티',
 	culture: '도서/문화/영화/음악',
 };
-const GiftConRegisterPage = () => {
+const GiftconRegisterPage = () => {
 	const [isImageUploaded, setIsImageUploaded] = useState(false);
 	const [category, setCategory] = useState(giftcons.category);
 	return (
@@ -97,4 +97,4 @@ const GiftConRegisterPage = () => {
 	);
 };
 
-export default GiftConRegisterPage;
+export default GiftconRegisterPage;
