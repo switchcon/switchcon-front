@@ -4,7 +4,12 @@
 		"paths": {
 			"@pages/*": ["./pages/*"],
 			"@components/*": ["./components/*"],
-			"@hooks/*": ["./hooks/*"]
+			"@hooks/*": ["./hooks/*"],
+			"@lib/*": ["./lib/*"],
+			"@apis/*": ["./apis/*"],
+			"@get/*": ["./get/*"],
+			"@post/*": ["./post/*"],
+			"@delelte/*": ["./delelte/*"]
 		}
 	}
 }

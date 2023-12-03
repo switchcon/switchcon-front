@@ -1,3 +1,4 @@
+/* eslint-disable */ //warning 무시
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

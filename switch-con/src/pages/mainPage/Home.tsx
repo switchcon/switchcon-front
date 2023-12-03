@@ -55,7 +55,7 @@ const Home = () => {
 				<IoIosSearch size={'20'} />
 				<IoMdNotificationsOutline size={'20'} className='ml-3 mr-4' />
 			</Header>
-			<main className='pt-16 px-6'>
+			<main className='px-6 pt-16'>
 				<div className='flex items-end justify-between mb-4'>
 					<p className='font-semibold'>내 기프티콘</p>
 					<p className='text-xs'>유효기간 임박순</p>
@@ -66,8 +66,8 @@ const Home = () => {
 					})}
 				</div>
 			</main>
-			<Footer />
-			<button className='w-[375px] fixed bottom-20 left-[300px]'>
+			<Footer selectedMenu='home' />
+			<button className='w-[375px] fixed bottom-20 translate-x-72'>
 				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
 			</button>
 		</>
