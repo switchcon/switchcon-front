@@ -59,7 +59,7 @@ const GiftconPost = () => {
 				<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
 					<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
 					<div className='w-full'>
-						<NearbyStoreMap />
+						<NearbyStoreMap searchKeyword={giftcon.store} />
 					</div>
 				</section>
 			</main>
