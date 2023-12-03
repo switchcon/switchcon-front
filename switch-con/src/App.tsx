@@ -3,7 +3,7 @@ import ExchangePostCreate from '@pages/exchange/ExchangePostCreate';
 import ExchangePostDetail from '@pages/exchange/ExchangePostDetail';
 import ExchangeRequest from '@pages/exchange/ExchangeRequest';
 import GiftconPost from '@pages/giftcon/GiftconPost';
-import GiftConRegisterPage from '@pages/giftcon/GiftconRegister';
+import GiftconRegisterPage from '@pages/giftcon/GiftconRegister';
 import Home from '@pages/mainPage/Home';
 import Landing from '@pages/mainPage/Landing';
 import MyExchange from '@pages/myExchange/MyExchange';
@@ -16,7 +16,7 @@ const App = () => {
 			<Route path='/' element={<Landing />} />
 			{/*홈- 내가 등록한 기프티콘 보는 곳 */}
 			<Route path='/home' element={<Home />} />
-			<Route path='/home/giftcon-regi' element={<GiftConRegisterPage />} /> {/* 기프티콘 등록페이지 */}
+			<Route path='/home/giftcon-regi' element={<GiftconRegisterPage />} /> {/* 기프티콘 등록페이지 */}
 			<Route path='/home/giftcon/:id' element={<GiftconPost />} /> 기프티콘 상세페이지
 			<Route path='/exchange-home' element={<ExchangeHome />} />
 			{/*교환 홈 */}
