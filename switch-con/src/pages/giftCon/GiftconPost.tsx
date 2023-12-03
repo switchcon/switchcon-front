@@ -1,4 +1,5 @@
 import Header from '@components/ui/Header';
+import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useParams } from 'react-router-dom';
 const example_img = '/images/image_url_1.jpg';
@@ -57,6 +58,9 @@ const GiftconPost = () => {
 				</section>
 				<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
 					<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
+					<div className='w-full'>
+						<NearbyStoreMap />
+					</div>
 				</section>
 			</main>
 		</div>
