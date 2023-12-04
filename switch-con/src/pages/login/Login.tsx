@@ -1,21 +1,11 @@
 /* eslint-disable */ //warning 무시
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Input, Inputs, Form, Title, Wrapper } from '@components/ui/Common';
+import { useState } from 'react';
+import { Input, Form, Wrapper } from '@components/ui/Common';
 import { styled } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginApi } from '@api/UserApi';
+import { loginApi } from '@api/UserAPI';
 
 import { Button } from '@components/ui/button';
-
-//home signup mypage
-
-// const Button = styled.button`
-// 	backgroud-color: black;
-// 	color: black;
-// 	padding: 20px;
-// 	border-radius: 10px;
-// `;
 
 const CustomLink = styled(Link)`
 	margin-top: 20px;

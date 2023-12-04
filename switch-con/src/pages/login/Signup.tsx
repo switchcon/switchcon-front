@@ -1,7 +1,7 @@
 /* eslint-disable */ //warning 무시
 import { useState } from 'react';
-import { Input, Inputs, Title, Wrapper } from '@components/ui/Common';
-import { signUp } from '@api/UserApi';
+import { Input, Inputs, Wrapper } from '@components/ui/Common';
+import { signUp } from '@api/UserAPI';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@components/ui/button';
 //home signup mypage
