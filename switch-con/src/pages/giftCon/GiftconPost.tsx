@@ -1,5 +1,7 @@
 import Header from '@components/ui/Header';
-import NearbyStoreMap from '../../lib/kakaoMap';
+
+import NearbyStoreMap from '@lib/kakaoMap';
+
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useParams } from 'react-router-dom';
 const example_img = '/images/image_url_1.jpg';

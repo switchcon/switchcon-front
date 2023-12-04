@@ -18,8 +18,10 @@ const GiftCard = ({
 	const containerClassName = `
     w-full 
     ${hoverOff ? '' : 'hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0'} 
+
       ${selected ? 'ring ring-[#44CD81] ring-offset-0' : ''}
       
+
     bg-white 
     rounded-md 
     px-4 
@@ -27,8 +29,10 @@ const GiftCard = ({
     flex 
     gap-2 
     shadow-md
+
       cursor-pointer
       relative
+
   `;
 
 	return (

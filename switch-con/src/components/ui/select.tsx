@@ -3,7 +3,10 @@
 import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { FaCheck, FaAngleDown } from 'react-icons/fa6';
-import { cn } from '../../lib/utils';
+
+
+import { cn } from '@lib/utils';
+
 
 const Select = SelectPrimitive.Root;
 

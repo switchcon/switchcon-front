@@ -5,11 +5,13 @@
 			"@pages/*": ["./pages/*"],
 			"@components/*": ["./components/*"],
 			"@hooks/*": ["./hooks/*"],
+
 			"@lib/*": ["./lib/*"],
 			"@apis/*": ["./apis/*"],
 			"@get/*": ["./get/*"],
 			"@post/*": ["./post/*"],
 			"@delete/*": ["./delete/*"]
+
 		}
 	}
 }
