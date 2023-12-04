@@ -9,7 +9,7 @@
 			"@apis/*": ["./apis/*"],
 			"@get/*": ["./get/*"],
 			"@post/*": ["./post/*"],
-			"@delelte/*": ["./delelte/*"]
+			"@delete/*": ["./delete/*"]
 		}
 	}
 }

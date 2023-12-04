@@ -1,5 +1,9 @@
 import { Button } from '@components/ui/button';
+import { gifticonExReqDelete } from '@delete/gifticonExReqDelete';
+
+import { ocrPost } from '@post/ocrPost';
 import axios from 'axios';
+
 // import { userInfo } from '../../get/userInfo';
 // import { gifticonExDetail } from '../../get/gifticonExDetail';
 // import { ExPost } from '../../get/ExPost';
@@ -23,6 +27,8 @@ const Landing = () => {
 	return (
 		<div>
 			<Button>로딩중</Button>
+			<Button onClick={() => ocrPost('/images/image_url_2.jpg')}>ocr post test</Button>
+			<Button onClick={() => gifticonExReqDelete(6, 6)}>gifticonExReqDelete delete test</Button>
 		</div>
 
 		/* <div>
