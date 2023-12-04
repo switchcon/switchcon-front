@@ -26,7 +26,11 @@ const Footer = ({ selectedMenu }: { selectedMenu: string }) => {
 					<p>교환</p>
 				</Link>
 				<Link
+
+					to='/exchange-home'
+
 					to='/my-con'
+
 					className={`flex flex-col items-center justify-center ${
 						selectedMenu === 'myExchange' ? 'text-brand-primary-normal' : ''
 					} hover:text-brand-primary-normal hover:bg-gray-50`}

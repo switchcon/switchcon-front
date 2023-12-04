@@ -1,3 +1,10 @@
+
+import Footer from '@components/ui/Footer';
+import GiftCard from '@components/ui/GiftCard';
+import Header from '@components/ui/Header';
+import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
+import { FaCirclePlus } from 'react-icons/fa6';
+
 'use client';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
@@ -58,6 +65,37 @@ const giftcons = [
 		created_at: '2023-11-24',
 		modfied_at: '2023-11-24',
 	},
+
+];
+
+const Home = () => {
+	return (
+		<>
+			<Header headline='스위치콘' navigaterOff>
+				<IoIosSearch size={'20'} />
+				<IoMdNotificationsOutline size={'20'} className='ml-3 mr-4' />
+			</Header>
+			<main className='px-6 pt-16'>
+				<div className='flex items-end justify-between mb-4'>
+					<p className='font-semibold'>내 기프티콘</p>
+					<p className='text-xs'>유효기간 임박순</p>
+				</div>
+				<div className='flex flex-col gap-2'>
+					{giftcons.map((gifticon) => {
+						return <GiftCard key={gifticon.exchangePost_id} gifticon={gifticon} />;
+					})}
+				</div>
+			</main>
+			<Footer selectedMenu='home' />
+			<button className='w-[375px] fixed bottom-20 translate-x-72'>
+				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
+			</button>
+		</>
+	);
+};
+
+export default Home;
+
 	{
 		exchangePost_id: 4,
 		gifticon_img: '/images/image_url_3.jpg',
@@ -132,3 +170,4 @@ const ExchangeRequest = () => {
 };
 
 export default ExchangeRequest;
+
