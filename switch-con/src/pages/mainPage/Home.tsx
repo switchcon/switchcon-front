@@ -5,6 +5,7 @@ import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import { getAllGiftcon } from '@api/GiftconAPI';
+import { Link } from 'react-router-dom';
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -84,9 +85,11 @@ const Home = () => {
 				</div>
 			</main>
 			<Footer selectedMenu='home' />
-			<button className='w-[375px] fixed bottom-20 translate-x-72'>
-				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
-			</button>
+			<Link to='/home/giftcon-regi'>
+				<button className='w-[375px] fixed bottom-20 translate-x-72'>
+					<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
+				</button>
+			</Link>
 		</>
 	);
 };

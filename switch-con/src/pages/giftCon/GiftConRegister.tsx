@@ -1,9 +1,13 @@
 import Header from '@components/ui/Header';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 const example_img = '/images/image_url_1.jpg';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/ui/select';
 import { Button } from '@components/ui/button';
+import { ocrPost } from '@api/GiftconAPI';
+
+const default_img = '/images/defaultImg.png';
+
 const giftcons = {
 	exchangePost_id: 1,
 	gifticon_img: '/images/image_url_1.jpg',
@@ -28,8 +32,45 @@ const category_list = {
 	culture: '도서/문화/영화/음악',
 };
 const GiftconRegisterPage = () => {
-	const [isImageUploaded, setIsImageUploaded] = useState(false);
+	const [gifticonImg, setGifticonImg] = useState(default_img);
 	const [category, setCategory] = useState(giftcons.category);
+	const [analyzedGifticon, setAnalyzedGifticon] = useState();
+	const fileInputRef = useRef(); //파일 업로드를 위한 ref
+
+	const getOcrAnalysis = async (file: File) => {
+		try {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onloadend = async () => {
+				const base64Image = reader.result as string;
+				const ocrAnalysis = await ocrPost(base64Image);
+				console.log(ocrAnalysis);
+				setAnalyzedGifticon(ocrAnalysis);
+			};
+		} catch (error) {
+			console.error('Ocr test fail');
+		}
+	};
+
+	const previewFile = (file) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			//파일 읽는 동작이 끝나면 발생하는 이벤트
+			setGifticonImg(reader.result as string); //reader.result는 string 또는 ArrayBuffer 타입을 반환하기 때문에 string 형 명시
+		};
+	};
+	//파일 등록시 호출
+	const handleFileInputChange = (e) => {
+		const file = e.target.files[0];
+		if (file && file.type.match('image.*')) {
+			previewFile(file);
+			getOcrAnalysis(file);
+		} else {
+			setGifticonImg(default_img);
+		}
+	};
+
 	return (
 		<div>
 			<Header headline={'기프티콘 등록'} />
@@ -37,14 +78,16 @@ const GiftconRegisterPage = () => {
 				<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 선택</div>
 				<div className='w-full px-6 py-6 overflow-hidden bg-white rounded-md'>
 					<AspectRatio.Root ratio={9 / 16}>
-						<img src={example_img} className='object-cover w-full h-full' />
+						<img src={gifticonImg} className='object-cover w-full h-full' />
 					</AspectRatio.Root>
 				</div>
 				<div className='mb-3'>
 					<input
+						ref={fileInputRef}
 						className='mt-2 relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-white px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-brand-primary-normal file:px-3 file:py-[0.32rem] file:text-white file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-brand-primary-light focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none '
 						type='file'
 						id='file-upload'
+						onChange={handleFileInputChange}
 						multiple
 					/>
 				</div>
