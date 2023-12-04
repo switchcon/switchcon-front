@@ -27,15 +27,25 @@ export const Title = styled.div`
 `;
 
 export const Input = styled.input`
+<<<<<<< HEAD
 	font-size: 16px;
 	height: 30px;
 	width: 250px;
 	border-radius: 5px;
+=======
+	font-size: 20px;
+	height: 30px;
+	border-radius: 10px;
+>>>>>>> 270a995c9dd5c94f4b5dadd857171979fb317b6f
 	border: none;
 	padding: 10px;
 	&::placeholder {
 		color: darkgray;
+<<<<<<< HEAD
 		font-size: 16px;
+=======
+		font-size: 20px;
+>>>>>>> 270a995c9dd5c94f4b5dadd857171979fb317b6f
 		font-weight: 500;
 		font-family: 'OTWelcomRA';
 	}

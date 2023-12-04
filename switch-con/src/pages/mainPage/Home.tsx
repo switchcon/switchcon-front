@@ -75,7 +75,7 @@ const Home = () => {
 			<main className='px-6 pt-16'>
 				<div className='flex items-end justify-between mb-4'>
 					<p className='font-semibold'>내 기프티콘</p>
-					<p className='text-xs'>유효기간 임박순</p>
+					<p className='text-xs'>최신등록순</p>
 				</div>
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {

@@ -3,13 +3,17 @@ import axios from 'axios';
 const api = axios.create({
 	baseURL: process.env.REACT_APP_BASE_URL,
 	withCredentials: true,
+	headers: {
+		Authorization: `Bearer ${localStorage.getItem('access')}`,
+		'Content-Type': 'application/json',
+	},
 });
 
 export const getAllGiftcon = async (sortType) => {
 	//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
 	try {
-		const response = await api.get(`/giftcon/all/${sortType}`);
-		return response.data;
+		const response = await api.get(`/gifticon/all/${sortType}`);
+		return response.data.data;
 	} catch (error) {
 		console.error('Error during giftconAll', error);
 		throw error;

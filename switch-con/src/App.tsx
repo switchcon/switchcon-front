@@ -2,10 +2,12 @@ import ExchangeHome from '@pages/exchange/ExchangeHome';
 import ExchangePostCreate from '@pages/exchange/ExchangePostCreate';
 import ExchangePostDetail from '@pages/exchange/ExchangePostDetail';
 import ExchangeRequest from '@pages/exchange/ExchangeRequest';
+
 import GiftconPost from '@pages/giftcon/GiftconPost';
 import GiftconRegisterPage from '@pages/giftcon/GiftconRegister';
 import Login from '@pages/login/Login';
 import Signup from '@pages/login/Signup';
+
 import Home from '@pages/mainPage/Home';
 import Landing from '@pages/mainPage/Landing';
 import MyExchange from '@pages/myExchange/MyExchange';

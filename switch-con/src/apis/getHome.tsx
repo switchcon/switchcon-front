@@ -1,3 +1,5 @@
+import { getAuthAxios } from './authAxios';
+
 export const getHome = async () => {
 	const access = localStorage.getItem('access');
 	// const authAxios = getAuthAxios(access);
