@@ -32,7 +32,7 @@ export const postGiftcon = async (
 	used: boolean,
 ) => {
 	try {
-		const response = await api.post(`/giftcon`, {
+		const response = await api.post(`/gifticon`, {
 			gifticonImg,
 			category,
 			store,
@@ -50,24 +50,12 @@ export const postGiftcon = async (
 	}
 };
 
-const fetchImageAndEncode = async (imageUrl) => {
-	try {
-		const response = await api.get(imageUrl, { responseType: 'arraybuffer' });
-		const base64Image = btoa(
-			new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), ''),
-		);
-		return base64Image;
-	} catch (error) {
-		console.error('이미지 가져오기 또는 인코딩 중 오류 발생:', error);
-		throw error;
-	}
-};
-
 export const ocrPost = async (base64Image: string) => {
 	try {
-		const response = await api.post(`/giftcon/ocr`, {
+		const response = await api.post(`/gifticon/ocr`, {
 			gifticonImg: base64Image,
 		});
+		console.log('ocr', response.data);
 		return response.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
