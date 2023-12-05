@@ -4,7 +4,7 @@ import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
-import { getAllGiftcon } from '@api/GiftconAPI';
+import { getAllGifticon } from '@api/GiftconAPI';
 import { Link } from 'react-router-dom';
 const giftcons = [
 	{
@@ -21,41 +21,13 @@ const giftcons = [
 		created_at: '2023-11-22',
 		modfied_at: '2023-11-22',
 	},
-	{
-		exchangePost_id: 2,
-		gifticon_img: '/images/image_url_2.jpg',
-		category: '디저트',
-		store: '배스킨라빈스',
-		product: '사랑에 빠진 딸기',
-		expiration_date: '2024-02-14',
-		barcode_num: '2345678901',
-		price: 8000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-23',
-		modfied_at: '2023-11-23',
-	},
-	{
-		exchangePost_id: 3,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expiration_date: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-	},
 ];
 
 const Home = () => {
 	const [giftcons, setGiftcons] = useState([]);
 	const fetchGiftcons = async (sortType: string) => {
 		try {
-			const giftcons = await getAllGiftcon(sortType);
+			const giftcons = await getAllGifticon(sortType);
 			setGiftcons(giftcons);
 			console.log('giftcons', giftcons);
 		} catch (error) {

@@ -9,7 +9,7 @@ const api = axios.create({
 	},
 });
 
-export const getAllGiftcon = async (sortType) => {
+export const getAllGifticon = async (sortType) => {
 	//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
 	try {
 		const response = await api.get(`/gifticon/all/${sortType}`);
@@ -20,7 +20,17 @@ export const getAllGiftcon = async (sortType) => {
 	}
 };
 
-export const postGiftcon = async (gifticon: {
+export const getGifticon = async (gifticonId: string) => {
+	try {
+		const response = await api.get(`/gifticon/${gifticonId}`);
+		return response.data.data;
+	} catch (error) {
+		console.error('Error during gifticonDetail', error);
+		throw error;
+	}
+};
+
+export const postGifticon = async (gifticon: {
 	gifticonImg: string;
 	category: string;
 	store: string;

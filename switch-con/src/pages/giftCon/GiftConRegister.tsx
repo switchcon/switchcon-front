@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 //import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/ui/select';
 import { Button } from '@components/ui/button';
-import { ocrPost, postGiftcon } from '@api/GiftconAPI';
+import { ocrPost, postGifticon } from '@api/GiftconAPI';
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -78,7 +78,7 @@ const GiftconRegisterPage = () => {
 	const onSubmitButton = async () => {
 		try {
 			const { active, ...giftconWithoutActive } = analyzedGifticon;
-			const postReq = await postGiftcon({
+			const postReq = await postGifticon({
 				...giftconWithoutActive,
 				expireDate: formatDate(analyzedGifticon.expireDate),
 			});
