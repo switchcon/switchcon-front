@@ -1,8 +1,11 @@
+import { getGifticon } from '@api/GiftconAPI';
 import Header from '@components/ui/Header';
 import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import { decodingBase64 } from './../../functions/base64Decoding';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-const example_img = '/images/image_url_1.jpg';
+const default_img = '/images/defaultImg.jpg';
 
 const giftcon = {
 	exchangePost_id: 1,
@@ -23,45 +26,73 @@ const giftcon = {
 const GiftconPostDetail = () => {
 	const { id } = useParams();
 	console.log('post ID', id);
+	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
+	const [decodedImg, setDecodedImg] = useState(null); //디코딩 이미지 담을곳
+
+	const fetchGifticonDetail = async () => {
+		try {
+			const data = await getGifticon(id);
+			const decodedImage = decodingBase64(data.gifticonImg); //디코딩
+			setDecodedImg(decodedImage);
+			setGifticon(data);
+		} catch (error) {
+			console.error();
+		}
+	};
+
+	//처음 렌더링시 데이터 불러옴
+	useEffect(() => {
+		fetchGifticonDetail();
+	}, []);
 	return (
 		<div>
 			<Header headline={'기프티콘 조회'} />
 			<main className='px-6 pt-16 pb-12'>
-				<div className='mt-2 mb-2 text-lg font-semibold'>{giftcon.store + giftcon.product} </div>
+				<div className='mt-2 mb-2 text-lg font-semibold'>{gifticon && gifticon.product} </div>
+
 				<div className='w-full px-6 py-6 overflow-hidden bg-white rounded-md'>
+					{/* 이미지 보여주는 곳  */}
 					<AspectRatio.Root ratio={9 / 16}>
-						<img src={example_img} className='object-cover w-full h-full' />
+						<img
+							src={decodedImg ? `data:image/png;base64,${btoa(decodedImg)}` : default_img}
+							className='object-cover w-full h-full'
+						/>
 					</AspectRatio.Root>
 				</div>
 				<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 정보</div>
-				<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
-						<p className='text-sm font-medium '> {giftcon.category}</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
-						<p className='text-sm font-medium '> {giftcon.store}</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
-						<p className='text-sm font-medium '> {giftcon.product}</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
-						<p className='text-sm font-medium '> {giftcon.expiration_date} 까지</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
-						<p className='text-sm font-medium '> {giftcon.price} 원</p>
-					</div>
-				</section>
-				<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-					<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
-					<div className='w-full'>
-						<NearbyStoreMap searchKeyword={giftcon.store} />
-					</div>
-				</section>
+				{gifticon && (
+					<>
+						<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
+								<p className='text-sm font-medium '> {gifticon.category}</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
+								<p className='text-sm font-medium '> {gifticon.store}</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
+								<p className='text-sm font-medium '> {gifticon.product}</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
+								<p className='text-sm font-medium '> {gifticon.expireDate} 까지</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
+								<p className='text-sm font-medium '> {giftcon.price} 원</p>
+							</div>
+						</section>
+						<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+							{/* 카카오 api key 요청 확인필요 현재 오류남 */}
+							<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
+							<div className='w-full'>
+								<NearbyStoreMap searchKeyword={giftcon.store} />
+							</div>
+						</section>
+					</>
+				)}
 			</main>
 		</div>
 	);
