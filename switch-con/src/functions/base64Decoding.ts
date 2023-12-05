@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // base64디코딩함수
-const useDecodingBase64 = (base64String) => {
+export const decodingBase64 = (base64String) => {
 	const [decodedImage, setDecodedImage] = useState(null);
 
 	useEffect(() => {

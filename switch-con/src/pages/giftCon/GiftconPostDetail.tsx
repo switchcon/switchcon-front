@@ -26,9 +26,12 @@ const GiftconPostDetail = () => {
 	const { id } = useParams();
 	console.log('post ID', id);
 	const [postData, setPostData] = useState(null);
+	const [decodedImg, setDecodedImg] = useState(null); //디코딩 이미지 담을곳
+
 	const fetchGifticonDetail = async () => {
 		try {
 			const data = await getGifticon(id);
+			const decodedImage = useDecodingBase64
 			setPostData(data);
 		} catch (error) {
 			console.error();
@@ -38,7 +41,6 @@ const GiftconPostDetail = () => {
 	//처음 렌더링시 데이터 불러옴
 	useEffect(() => {
 		fetchGifticonDetail();
-		
 	}, []);
 	return (
 		<div>
