@@ -45,7 +45,7 @@ const Home = () => {
 				<IoIosSearch size={'20'} />
 				<IoMdNotificationsOutline size={'20'} className='ml-3 mr-4' />
 			</Header>
-			<main className='px-6 pt-16'>
+			<main className='h-full px-6 pt-16 pb-24 overflow-y-auto'>
 				<div className='flex items-end justify-between mb-4'>
 					<p className='font-semibold'>내 기프티콘</p>
 					<p className='text-xs'>최신등록순</p>

@@ -2,7 +2,7 @@ import { getGifticon } from '@api/GiftconAPI';
 import Header from '@components/ui/Header';
 import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-import { decodingBase64 } from 'functions/base64Decoding';
+import { decodingBase64 } from './../../functions/base64Decoding';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 const default_img = '/images/defaultImg.jpg';
