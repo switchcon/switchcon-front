@@ -1,9 +1,7 @@
 /* eslint-disable */ //warning 무시
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Input, Inputs, Title, Wrapper } from '@components/ui/Common';
-import { styled } from 'styled-components';
-import { signUp } from '../../apis/signUp';
+import { useState } from 'react';
+import { Input, Inputs, Wrapper } from '@components/ui/Common';
+import { signUp } from '@api/UserAPI';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@components/ui/button';
 //home signup mypage
@@ -35,26 +33,18 @@ const Signup = () => {
 
 	return (
 		<Wrapper>
-			<Title>회원가입</Title>
+			<h1 className='mt-20 mb-16 text-lg font-bold'>스위치콘 회원가입</h1>
 			<Inputs>
 				<Input placeholder='아이디' value={accountId} onChange={onChangeID} />
 				<Input placeholder='비밀번호' type='password' value={password} onChange={onChangePW} />
 				<Input placeholder='비밀번호 확인' type='Password' value={checkPassword} onChange={onChangeName} />
 				<Input placeholder='닉네임' value={nickname} onChange={onChangeAge} />
 			</Inputs>
-			<Button onClick={onClick}>Sign Up</Button>
+			<Button className='w-3/5 mt-8 rounded-lg ' onClick={onClick}>
+				회원 등록
+			</Button>
 		</Wrapper>
 	);
 };
 
 export default Signup;
-// const Button = styled.button`
-// 	background-color: black;
-// 	color: white;
-// 	padding-left: px;
-// 	paddiing-right: px;
-// 	padding-top: 10px;
-// 	padding-bottom: 10px;
-// 	border-radius: 10px;
-// 	margin-top: 20px;
-// `;

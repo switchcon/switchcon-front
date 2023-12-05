@@ -3,7 +3,7 @@ import { getNewRefreshToken } from './refresh';
 
 export const getAuthAxios = (token) => {
 	const authAxios = axios.create({
-		baseURL: 'http://3.36.253.248:8080/login',
+		baseURL: `${process.env.REACT_APP_BASE_URL}/login`,
 		headers: {
 			Authorization: token,
 		},
