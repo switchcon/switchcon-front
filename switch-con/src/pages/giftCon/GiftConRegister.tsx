@@ -43,7 +43,8 @@ const GiftconRegisterPage = () => {
 			reader.readAsDataURL(file);
 			reader.onloadend = async () => {
 				const base64Image = reader.result as string;
-				const ocrAnalysis = await ocrPost(base64Image);
+				const base64Data = base64Image.split(',')[1];
+				const ocrAnalysis = await ocrPost(base64Data);
 				console.log(ocrAnalysis);
 				setAnalyzedGifticon(ocrAnalysis);
 			};
