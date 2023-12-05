@@ -20,30 +20,20 @@ export const getAllGiftcon = async (sortType) => {
 	}
 };
 
-export const postGiftcon = async (
-	gifticonImg: string,
-	category: string,
-	store: string,
-	product: string,
-	barcodeNum: string,
-	orderNum: string,
-	expireDate: string,
-	price: number,
-	used: boolean,
-) => {
+export const postGiftcon = async (gifticon: {
+	gifticonImg: string;
+	category: string;
+	store: string;
+	product: string;
+	barcodeNum: string;
+	orderNum: string;
+	expireDate: string;
+	price: number;
+	used: boolean;
+}) => {
 	try {
-		const response = await api.post(`/gifticon`, {
-			gifticonImg,
-			category,
-			store,
-			product,
-			barcodeNum,
-			orderNum,
-			expireDate,
-			price,
-			used,
-		});
-		return response.data;
+		const response = await api.post(`/gifticon`, gifticon);
+		return response.data.status;
 	} catch (error) {
 		console.error('Error during POST giftcon', error);
 		throw error;
@@ -56,7 +46,7 @@ export const ocrPost = async (base64Image: string) => {
 			gifticonImg: base64Image,
 		});
 		console.log('ocr', response.data);
-		return response.data;
+		return response.data.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
 		throw error;

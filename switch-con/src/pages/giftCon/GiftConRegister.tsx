@@ -1,40 +1,44 @@
 import Header from '@components/ui/Header';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-const example_img = '/images/image_url_1.jpg';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/ui/select';
+//import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@components/ui/select';
 import { Button } from '@components/ui/button';
-import { ocrPost } from '@api/GiftconAPI';
-
+import { ocrPost, postGiftcon } from '@api/GiftconAPI';
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from '@components/ui/alert-dialog';
+import { useNavigate } from 'react-router';
 const default_img = '/images/defaultImg.png';
 
-const giftcons = {
-	exchangePost_id: 1,
-	gifticon_img: '/images/image_url_1.jpg',
-	category: '식품/음료',
-	store: '스타벅스',
-	product: '아메리카노',
-	expiration_date: '2024-01-01',
-	barcode_num: '1234567890',
-	price: 5000,
-	is_used: false,
-	is_active: true,
-	created_at: '2023-11-22',
-	modfied_at: '2023-11-22',
-	exchangeReq_count: 3,
-};
-
-const category_list = {
-	cafe: '커피/음료',
-	bakery: '베이커리/도넛',
-	chicken: '치킨/피자',
-	beauty: '뷰티',
-	culture: '도서/문화/영화/음악',
+// const category_list = {
+// 	cafe: '커피/음료',
+// 	bakery: '베이커리/도넛',
+// 	chicken: '치킨/피자',
+// 	beauty: '뷰티',
+// 	culture: '도서/문화/영화/음악',
+// };
+const formatDate = (dateString) => {
+	const date = new Date(dateString);
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, '0');
+	const day = String(date.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`;
 };
 const GiftconRegisterPage = () => {
+	const router = useNavigate();
+
 	const [gifticonImg, setGifticonImg] = useState(default_img);
-	const [category, setCategory] = useState(giftcons.category);
-	const [analyzedGifticon, setAnalyzedGifticon] = useState();
+	// const [category, setCategory] = useState(null);
+	const [analyzedGifticon, setAnalyzedGifticon] = useState(null);
+	const [showAlertModal, setShowAlertModal] = useState(false);
+	const [AlertMessage, setAlertMessage] = useState('');
 	const fileInputRef = useRef(); //파일 업로드를 위한 ref
 
 	const getOcrAnalysis = async (file: File) => {
@@ -71,7 +75,39 @@ const GiftconRegisterPage = () => {
 			setGifticonImg(default_img);
 		}
 	};
-
+	const onSubmitButton = async () => {
+		try {
+			const { active, ...giftconWithoutActive } = analyzedGifticon;
+			const postReq = await postGiftcon({
+				...giftconWithoutActive,
+				expireDate: formatDate(analyzedGifticon.expireDate),
+			});
+			if (postReq !== 200) {
+				throw Error;
+			}
+			setAlertMessage('기프티콘 등록에 성공했습니다.');
+			setShowAlertModal(true);
+		} catch (error) {
+			console.error('기프티콘 등록실패'), error;
+			setAlertMessage('기프티콘 등록에 실패했습니다.');
+			setShowAlertModal(true);
+		}
+	};
+	const onClickModal = () => {
+		setShowAlertModal(false); //postReq가 정상요청되었으면 /home 으로 이동, 기프티콘 등록실패일 경우 모달창만 닫기.
+		if (AlertMessage === '기프티콘 등록에 성공했습니다.') {
+			router('/home');
+		}
+	};
+	useEffect(() => {
+		if (showAlertModal) {
+			// Programmatically trigger the click event
+			const alertDialogButton = document.getElementById('alertDialogButton');
+			if (alertDialogButton) {
+				alertDialogButton.click();
+			}
+		}
+	}, [showAlertModal]);
 	return (
 		<div>
 			<Header headline={'기프티콘 등록'} />
@@ -93,49 +129,86 @@ const GiftconRegisterPage = () => {
 					/>
 				</div>
 				<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 정보</div>
-				<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
-						<div className='flex justify-between'>
-							<p className='text-sm font-medium '> {category}</p>
-							<Select>
-								<SelectTrigger className='w-[150px]'>
-									<SelectValue placeholder='직접선택' />
-								</SelectTrigger>
-								<SelectContent>
-									{Object.entries(category_list).map(([key, value]) => (
-										<SelectItem
-											key={key}
-											value={key}
-											onChange={() => {
-												setCategory(value); //변경시 카테고리 반영안됨.
-											}}
-										>
-											{value}
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
+				{analyzedGifticon !== null ? (
+					<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+						<div className='flex flex-col'>
+							<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
+							<div className='flex justify-between'>
+								<p className='text-sm font-medium '> {analyzedGifticon.category}</p>
+								{/* <Select>
+									<SelectTrigger className='w-[150px]'>
+										<SelectValue placeholder='직접선택' />
+									</SelectTrigger>
+									<SelectContent>
+										{Object.entries(category_list).map(([key, value]) => (
+											<SelectItem
+												key={key}
+												value={key}
+												onChange={() => {
+													setCategory(value); //변경시 카테고리 반영안됨.
+												}}
+											>
+												{value}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select> */}
+							</div>
 						</div>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
-						<p className='text-sm font-medium '> {giftcons.store}</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
-						<p className='text-sm font-medium '> {giftcons.product}</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
-						<p className='text-sm font-medium '> {giftcons.expiration_date} 까지</p>
-					</div>
-					<div className='flex flex-col'>
-						<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
-						<p className='text-sm font-medium '> {giftcons.price} 원</p>
-					</div>
-				</section>
-				<Button className='w-3/5 mt-8 ml-16'>기프티콘 등록</Button>
+						<div className='flex flex-col'>
+							<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
+							<p className='text-sm font-medium '> {analyzedGifticon.store}</p>
+						</div>
+						<div className='flex flex-col'>
+							<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
+							<p className='text-sm font-medium '> {analyzedGifticon.product}</p>
+						</div>
+						<div className='flex flex-col'>
+							<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
+							<p className='text-sm font-medium '> {analyzedGifticon.expireDate} 까지</p>
+						</div>
+						<div className='flex flex-col'>
+							<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
+							<p className='text-sm font-medium '> {analyzedGifticon.price} 원</p>
+						</div>
+						<AlertDialog>
+							<AlertDialogTrigger>
+								<Button className='w-3/5 '>기프티콘 등록</Button>
+							</AlertDialogTrigger>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									<AlertDialogTitle>기프티콘을 등록하시겠습니까?</AlertDialogTitle>
+								</AlertDialogHeader>
+								<AlertDialogFooter>
+									<AlertDialogCancel>취소</AlertDialogCancel>
+									<AlertDialogAction asChild>
+										<Button onClick={onSubmitButton}>확인</Button>
+									</AlertDialogAction>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+						{/* 기프티콘 등록 요청 후 성공 실패 확인 모달 */}
+						{showAlertModal && (
+							<AlertDialog>
+								<AlertDialogTrigger>
+									<Button id='alertDialogButton' className='hidden w-3/5' />
+								</AlertDialogTrigger>
+								<AlertDialogContent>
+									<AlertDialogHeader>
+										<AlertDialogTitle> {AlertMessage}</AlertDialogTitle>
+									</AlertDialogHeader>
+									<AlertDialogFooter>
+										<AlertDialogAction asChild>
+											<Button onClick={onClickModal}>확인</Button>
+										</AlertDialogAction>
+									</AlertDialogFooter>
+								</AlertDialogContent>
+							</AlertDialog>
+						)}
+					</section>
+				) : (
+					<section className='px-2 py-3 text-sm bg-white rounded-md'>기프티콘을 등록해주세요!</section>
+				)}
 			</main>
 		</div>
 	);
