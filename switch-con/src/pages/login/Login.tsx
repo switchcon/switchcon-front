@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Input, Form, Wrapper } from '@components/ui/Common';
 import { styled } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginApi } from '@api/UserAPI';
+import { loginApi } from '@api/UserApi';
 
 import { Button } from '@components/ui/button';
 

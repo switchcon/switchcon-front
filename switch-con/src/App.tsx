@@ -2,9 +2,9 @@ import ExchangeHome from '@pages/exchange/ExchangeHome';
 import ExchangePostCreate from '@pages/exchange/ExchangePostCreate';
 import ExchangePostDetail from '@pages/exchange/ExchangePostDetail';
 import ExchangeRequest from '@pages/exchange/ExchangeRequest';
-import GiftconPostDetail from '@pages/giftcon/GiftconPostDetail';
+import GiftconPostDetail from '@pages/giftCon/GiftconPostDetail';
 
-import GiftconRegisterPage from '@pages/giftcon/GiftconRegister';
+import GiftconRegisterPage from '@pages/giftCon/GiftConRegister';
 import Login from '@pages/login/Login';
 import Signup from '@pages/login/Signup';
 
