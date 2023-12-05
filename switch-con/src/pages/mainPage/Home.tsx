@@ -52,7 +52,11 @@ const Home = () => {
 				</div>
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
-						return <GiftCard key={gifticon.giftconId} gifticon={gifticon} />;
+						return (
+							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
+								<GiftCard gifticon={gifticon} />
+							</Link>
+						);
 					})}
 				</div>
 			</main>
