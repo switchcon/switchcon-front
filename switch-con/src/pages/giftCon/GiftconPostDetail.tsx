@@ -42,50 +42,52 @@ const GiftconPostDetail = () => {
 	return (
 		<div>
 			<Header headline={'기프티콘 조회'} />
-			<main className='px-6 pt-16 pb-12'>
-				{gifticon ? <div className='mt-2 mb-2 text-lg font-semibold'>{gifticon.product} </div> : null}
+			{gifticon && (
+				<main className='px-6 pt-16 pb-12'>
+					<div className='mt-2 mb-2 text-lg font-semibold'>{gifticon.product} </div>
 
-				<div className='w-full px-6 py-6 overflow-hidden bg-white rounded-md'>
-					{/* 이미지 보여주는 곳  */}
-					<AspectRatio.Root ratio={9 / 16}>
-						<img src={`data:image/jpeg;base64,${gifticon.gifticonImg}`} className='object-cover w-full h-full' />
-					</AspectRatio.Root>
-				</div>
-				<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 정보</div>
-				{gifticon && (
-					<>
-						<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-							<div className='flex flex-col'>
-								<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
-								<p className='text-sm font-medium '> {gifticon.category}</p>
-							</div>
-							<div className='flex flex-col'>
-								<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
-								<p className='text-sm font-medium '> {gifticon.store}</p>
-							</div>
-							<div className='flex flex-col'>
-								<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
-								<p className='text-sm font-medium '> {gifticon.product}</p>
-							</div>
-							<div className='flex flex-col'>
-								<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
-								<p className='text-sm font-medium '> {gifticon.expireDate} 까지</p>
-							</div>
-							<div className='flex flex-col'>
-								<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
-								<p className='text-sm font-medium '> {giftcon.price} 원</p>
-							</div>
-						</section>
-						<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-							{/* 카카오 api key 요청 확인필요 현재 오류남 */}
-							<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
-							<div className='w-full'>
-								<NearbyStoreMap searchKeyword={giftcon.store} />
-							</div>
-						</section>
-					</>
-				)}
-			</main>
+					<div className='w-full px-6 py-6 overflow-hidden bg-white rounded-md'>
+						{/* 이미지 보여주는 곳  */}
+						<AspectRatio.Root ratio={9 / 16}>
+							<img src={`data:image/jpeg;base64,${gifticon.gifticonImg}`} className='object-cover w-full h-full' />
+						</AspectRatio.Root>
+					</div>
+					<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 정보</div>
+					{gifticon && (
+						<>
+							<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+								<div className='flex flex-col'>
+									<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
+									<p className='text-sm font-medium '> {gifticon.category}</p>
+								</div>
+								<div className='flex flex-col'>
+									<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
+									<p className='text-sm font-medium '> {gifticon.store}</p>
+								</div>
+								<div className='flex flex-col'>
+									<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
+									<p className='text-sm font-medium '> {gifticon.product}</p>
+								</div>
+								<div className='flex flex-col'>
+									<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
+									<p className='text-sm font-medium '> {gifticon.expireDate} 까지</p>
+								</div>
+								<div className='flex flex-col'>
+									<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
+									<p className='text-sm font-medium '> {giftcon.price} 원</p>
+								</div>
+							</section>
+							<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+								{/* 카카오 api key 요청 확인필요 현재 오류남 */}
+								<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
+								<div className='w-full'>
+									<NearbyStoreMap searchKeyword={giftcon.store} />
+								</div>
+							</section>
+						</>
+					)}
+				</main>
+			)}
 		</div>
 	);
 };
