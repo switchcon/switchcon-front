@@ -29,7 +29,6 @@ const Home = () => {
 		try {
 			const giftcons = await getAllGifticon(sortType);
 			setGiftcons(giftcons);
-			console.log('giftcons', giftcons);
 		} catch (error) {
 			console.error(error);
 		}

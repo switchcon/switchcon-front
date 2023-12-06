@@ -1,7 +1,6 @@
 import { Button } from '@components/ui/button';
 import axios from 'axios';
 
-import { ocrPost } from '@post/ocrPost';
 // import { gifticonExReqDelete } from 'delete/gifticonExReqDelete';
 
 // import { userInfo } from '../../get/userInfo';
@@ -27,7 +26,7 @@ const Landing = () => {
 	return (
 		<div>
 			<Button>로딩중</Button>
-			<Button onClick={() => ocrPost('/images/image_url_2.jpg')}>ocr post test</Button>
+
 			{/* <Button onClick={() => gifticonExReqDelete(6, 6)}>gifticonExReqDelete delete test</Button> */}
 		</div>
 
