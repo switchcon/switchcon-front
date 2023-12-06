@@ -1,9 +1,21 @@
-import { getGifticon } from '@api/GiftconAPI';
+import { getGifticon, gifticonDelete } from '@api/GiftconAPI';
 import Header from '@components/ui/Header';
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from '@components/ui/alert-dialog';
+import { Button } from '@components/ui/button';
 import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 const default_img = '/images/defaultImg.jpg';
 
 const giftcon = {
@@ -25,11 +37,25 @@ const giftcon = {
 const GiftconPostDetail = () => {
 	const { id } = useParams();
 	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
+	const router = useNavigate();
 
 	const fetchGifticonDetail = async () => {
 		try {
-			const data = await getGifticon(id);
+			const data = await getGifticon(parseInt(id, 10));
 			setGifticon(data);
+		} catch (error) {
+			console.error();
+		}
+	};
+
+	const handleGifticonDelete = async () => {
+		try {
+			const response_status = await gifticonDelete(parseInt(id, 10));
+			console.log(response_status);
+			if (response_status >= 200 && response_status < 300) {
+				console.log('삭제성공');
+				router('/home');
+			}
 		} catch (error) {
 			console.error();
 		}
@@ -84,6 +110,24 @@ const GiftconPostDetail = () => {
 									<NearbyStoreMap searchKeyword={giftcon.store} />
 								</div>
 							</section>
+							<AlertDialog>
+								<AlertDialogTrigger>
+									<Button className='mt-4 mb-2'>기프티콘 삭제</Button>
+								</AlertDialogTrigger>
+								<AlertDialogContent>
+									<AlertDialogHeader>
+										<AlertDialogTitle>기프티콘을 삭제하시겠습니까?</AlertDialogTitle>
+									</AlertDialogHeader>
+									<AlertDialogFooter>
+										<AlertDialogCancel>취소</AlertDialogCancel>
+										<AlertDialogAction asChild>
+											<Button onClick={handleGifticonDelete} form='exchange_post'>
+												확인
+											</Button>
+										</AlertDialogAction>
+									</AlertDialogFooter>
+								</AlertDialogContent>
+							</AlertDialog>
 						</>
 					)}
 				</main>
