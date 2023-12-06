@@ -25,14 +25,15 @@ const giftcon = {
 
 const GiftconPostDetail = () => {
 	const { id } = useParams();
-	console.log('post ID', id);
 	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
 	const [decodedImg, setDecodedImg] = useState(null); //디코딩 이미지 담을곳
 
 	const fetchGifticonDetail = async () => {
 		try {
 			const data = await getGifticon(id);
+			console.log('data', data);
 			const decodedImage = decodingBase64(data.gifticonImg); //디코딩
+			console.log('decodedImage', decodedImage);
 			setDecodedImg(decodedImage);
 			setGifticon(data);
 		} catch (error) {
@@ -48,7 +49,7 @@ const GiftconPostDetail = () => {
 		<div>
 			<Header headline={'기프티콘 조회'} />
 			<main className='px-6 pt-16 pb-12'>
-				<div className='mt-2 mb-2 text-lg font-semibold'>{gifticon && gifticon.product} </div>
+				{gifticon ? <div className='mt-2 mb-2 text-lg font-semibold'>{gifticon.product} </div> : null}
 
 				<div className='w-full px-6 py-6 overflow-hidden bg-white rounded-md'>
 					{/* 이미지 보여주는 곳  */}
