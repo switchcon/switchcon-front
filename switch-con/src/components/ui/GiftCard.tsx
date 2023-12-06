@@ -46,7 +46,7 @@ const GiftCard = ({
 		<section className={containerClassName} onClick={onClick}>
 			<div className='w-2/5 mr-2 overflow-hidden rounded-md'>
 				<AspectRatio.Root ratio={1 / 1}>
-					<img src={gifticon.gifticon_img} className='object-cover w-full h-full' />
+					<img src={gifticon.gifticonImg} className='object-cover w-full h-full' />
 				</AspectRatio.Root>
 			</div>
 			<div className='flex flex-col w-3/5 gap-1'>

@@ -1,7 +1,9 @@
 /* eslint-disable */ //warning 무시
-import { useState } from 'react';
-import { Input, Inputs, Wrapper } from '@components/ui/Common';
-
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Input, Inputs, Title, Wrapper } from '@components/ui/Common';
+import { styled } from 'styled-components';
+import { signUp } from '../../apis/signUp';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@components/ui/button';
 import { signUp } from '@api/UserAPI';
