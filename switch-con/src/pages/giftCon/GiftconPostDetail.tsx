@@ -1,5 +1,5 @@
 import Header from '@components/ui/Header';
-import NearbyStoreMap from '../../lib/kakaoMap';
+import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useParams } from 'react-router-dom';
 const example_img = '/images/image_url_1.jpg';
@@ -20,7 +20,7 @@ const giftcon = {
 	exchangeReq_count: 3,
 };
 
-const GiftconPost = () => {
+const GiftconPostDetail = () => {
 	const { id } = useParams();
 	console.log('post ID', id);
 	return (
@@ -67,4 +67,4 @@ const GiftconPost = () => {
 	);
 };
 
-export default GiftconPost;
+export default GiftconPostDetail;

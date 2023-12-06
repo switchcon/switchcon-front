@@ -1,8 +1,20 @@
-import Footer from '@components/ui/Footer';
+'use client';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
-import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
-import { FaCirclePlus } from 'react-icons/fa6';
+import { useState } from 'react';
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from '@components/ui/alert-dialog';
+import { Button } from '@components/ui/button';
+
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -46,32 +58,77 @@ const giftcons = [
 		created_at: '2023-11-24',
 		modfied_at: '2023-11-24',
 	},
+	{
+		exchangePost_id: 4,
+		gifticon_img: '/images/image_url_3.jpg',
+		category: '푸드',
+		store: '피자헛',
+		product: '슈퍼슈프림 피자',
+		expiration_date: '2024-03-30',
+		barcode_num: '3456789012',
+		price: 20000,
+		is_used: false,
+		is_active: true,
+		created_at: '2023-11-24',
+		modfied_at: '2023-11-24',
+	},
 ];
-
-const Home = () => {
+const ExchangeRequest = () => {
+	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		// const response = await
+		console.log('Form submitted with gift icon:', selectedGiftIcon);
+	};
 	return (
-		<>
-			<Header headline='스위치콘' navigaterOff>
-				<IoIosSearch size={'20'} />
-				<IoMdNotificationsOutline size={'20'} className='ml-3 mr-4' />
-			</Header>
-			<main className='px-6 pt-16'>
+		<div className='pb-6 '>
+			<Header headline='기프티콘 교환 요청' />
+			<main className='px-6 pt-16 pb-4'>
 				<div className='flex items-end justify-between mb-4'>
 					<p className='font-semibold'>내 기프티콘</p>
-					<p className='text-xs'>유효기간 임박순</p>
 				</div>
-				<div className='flex flex-col gap-2'>
+				<form onSubmit={handleSubmit} id='exchange_request' className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
-						return <GiftCard key={gifticon.exchangePost_id} gifticon={gifticon} />;
+						return (
+							<GiftCard
+								key={gifticon.exchangePost_id}
+								gifticon={gifticon}
+								onClick={() => setSelectedGiftIcon(gifticon.exchangePost_id)}
+								selected={selectedGiftIcon === gifticon.exchangePost_id}
+							>
+								<input type='radio' value={gifticon.exchangePost_id.toString()} hidden />
+							</GiftCard>
+						);
 					})}
-				</div>
+				</form>
 			</main>
-			<Footer selectedMenu='home' />
-			<button className='w-[375px] fixed bottom-20 translate-x-72'>
-				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
-			</button>
-		</>
+			<AlertDialog>
+				<AlertDialogTrigger>
+					<button className='fixed bottom-4 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
+						교환 신청
+					</button>
+				</AlertDialogTrigger>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>선택한 기프티콘으로 교환신청 하시겠습니까?</AlertDialogTitle>
+						<AlertDialogDescription>
+							교환 신청한 기프티콘은 사용이 불가합니다. (단, 교환요청 취소 시 사용 가능)
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel>취소</AlertDialogCancel>
+						<AlertDialogAction asChild>
+							<Button type='submit' form='exchange_request'>
+								확인
+							</Button>
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
+
+			{/*교환신청 로직 */}
+		</div>
 	);
 };
 
-export default Home;
+export default ExchangeRequest;

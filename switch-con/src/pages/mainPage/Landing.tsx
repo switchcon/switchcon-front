@@ -1,7 +1,4 @@
 import { Button } from '@components/ui/button';
-import { gifticonDelete } from '@delete/gifticonDelete';
-import { gifticonExDelete } from '@delete/gifticonExDelete';
-import { gifticonExReqDelete } from '@delete/gifticonExReqDelete';
 import { ExPost } from '@get/ExPost';
 import { ExReq } from '@get/ExReq';
 import { gifticonAll } from '@get/gifticonAll';
@@ -14,12 +11,13 @@ import { gifticonExReqPost } from '@post/gifticonExReqPost';
 import { gifticonExSuccessPost } from '@post/gifticonExSuccessPost';
 import { gifticonPost } from '@post/gifticonPost';
 
-import { ocrPost } from '@post/ocrPost';
 import axios from 'axios';
+
+import { ocrPost } from '@post/ocrPost';
+// import { gifticonExReqDelete } from 'delete/gifticonExReqDelete';
 
 axios.defaults.withCredentials = true;
 
-/* eslint-disable */ //warning 무시
 const Landing = () => {
 	return (
 		<div>
@@ -41,10 +39,6 @@ const Landing = () => {
 				gifticonPost post test
 			</Button>
 			<Button onClick={() => ocrPost('/images/image_url_2.jpg')}>ocr post test</Button>
-			delete
-			<Button onClick={() => gifticonDelete(30)}>gifticonDelete delete test</Button>
-			<Button onClick={() => gifticonExDelete(7)}>gifticonExDelete delete test</Button>
-			<Button onClick={() => gifticonExReqDelete(6, 6)}>gifticonExReqDelete delete test</Button>
 		</div>
 	);
 };

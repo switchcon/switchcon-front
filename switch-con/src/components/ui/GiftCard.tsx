@@ -1,14 +1,21 @@
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 
 const GiftCard = ({
-	gifticon,
+	gifticon = {
+		gifticon_img: '',
+		product: '',
+		category: '',
+		store: '',
+		expiration_date: '',
+		price: 0,
+	},
 	children,
 	hoverOff,
 	onClick,
 	selected,
 	exchanged,
 }: {
-	gifticon: any;
+	gifticon?: any;
 	children?: React.ReactNode;
 	hoverOff?: boolean;
 	onClick?: (event: React.MouseEvent) => void;
@@ -18,8 +25,10 @@ const GiftCard = ({
 	const containerClassName = `
     w-full 
     ${hoverOff ? '' : 'hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0'} 
+
       ${selected ? 'ring ring-[#44CD81] ring-offset-0' : ''}
       
+
     bg-white 
     rounded-md 
     px-4 
@@ -27,8 +36,10 @@ const GiftCard = ({
     flex 
     gap-2 
     shadow-md
+
       cursor-pointer
       relative
+
   `;
 
 	return (
@@ -43,7 +54,7 @@ const GiftCard = ({
 				<p className='font-medium text-stone-600'>
 					{gifticon.category}/{gifticon.store}
 				</p>
-				<p className='text-sm font-semibold text-green-950'>{gifticon.expiration_date}</p>
+				<p className='text-sm font-semibold text-green-950'>{gifticon.expirationDdate}</p>
 				<p className='text-sm font-semibold text-green-800'>약 {gifticon.price} 원</p>
 				<div>{children}</div>
 			</div>

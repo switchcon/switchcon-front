@@ -6,10 +6,11 @@
 			"@components/*": ["./components/*"],
 			"@hooks/*": ["./hooks/*"],
 			"@lib/*": ["./lib/*"],
+			"@api/*": ["./api/*"],
 			"@apis/*": ["./apis/*"],
 			"@get/*": ["./get/*"],
 			"@post/*": ["./post/*"],
-			"@delete/*": ["./delete/*"]
+			"@delelte/*": ["./delelte/*"]
 		}
 	}
 }
