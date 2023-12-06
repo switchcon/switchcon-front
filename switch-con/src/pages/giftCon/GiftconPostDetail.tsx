@@ -31,9 +31,7 @@ const GiftconPostDetail = () => {
 	const fetchGifticonDetail = async () => {
 		try {
 			const data = await getGifticon(id);
-			console.log('data', data);
 			const decodedImage = decodingBase64(data.gifticonImg); //디코딩
-			console.log('decodedImage', decodedImage);
 			setDecodedImg(decodedImage);
 			setGifticon(data);
 		} catch (error) {
@@ -54,10 +52,7 @@ const GiftconPostDetail = () => {
 				<div className='w-full px-6 py-6 overflow-hidden bg-white rounded-md'>
 					{/* 이미지 보여주는 곳  */}
 					<AspectRatio.Root ratio={9 / 16}>
-						<img
-							src={decodedImg ? `data:image/png;base64,${btoa(decodedImg)}` : default_img}
-							className='object-cover w-full h-full'
-						/>
+						<img src={`data:image/jpeg;base64,${gifticon.gifticonImg}`} className='object-cover w-full h-full' />
 					</AspectRatio.Root>
 				</div>
 				<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 정보</div>
