@@ -2,7 +2,6 @@ import { getGifticon } from '@api/GiftconAPI';
 import Header from '@components/ui/Header';
 import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-import { decodingBase64 } from './../../functions/base64Decoding';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 const default_img = '/images/defaultImg.jpg';
@@ -26,13 +25,10 @@ const giftcon = {
 const GiftconPostDetail = () => {
 	const { id } = useParams();
 	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
-	const [decodedImg, setDecodedImg] = useState(null); //디코딩 이미지 담을곳
 
 	const fetchGifticonDetail = async () => {
 		try {
 			const data = await getGifticon(id);
-			const decodedImage = decodingBase64(data.gifticonImg); //디코딩
-			setDecodedImg(decodedImage);
 			setGifticon(data);
 		} catch (error) {
 			console.error();
