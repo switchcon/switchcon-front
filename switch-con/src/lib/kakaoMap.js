@@ -10,7 +10,6 @@ const NearbyStoreMap = ({ searchKeyword }) => {
 					const lat = position.coords.latitude;
 					const lng = position.coords.longitude;
 
-					console.log('users position', lat, lng);
 					const container = document.getElementById('map');
 					const userLocation = new kakao.maps.LatLng(lat, lng);
 					const options = {

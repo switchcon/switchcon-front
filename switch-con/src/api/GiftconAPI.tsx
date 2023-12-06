@@ -20,7 +20,7 @@ export const getAllGifticon = async (sortType) => {
 	}
 };
 
-export const getGifticon = async (gifticonId: string) => {
+export const getGifticon = async (gifticonId: number) => {
 	try {
 		const response = await api.get(`/gifticon/${gifticonId}`);
 		return response.data.data;
@@ -59,6 +59,17 @@ export const ocrPost = async (base64Image: string) => {
 		return response.data.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
+		throw error;
+	}
+};
+
+//기프티콘 삭제
+export const gifticonDelete = async (gifticonId: number) => {
+	try {
+		const response = await api.delete(`/gifticon/${gifticonId}`);
+		return response.data.status;
+	} catch (error) {
+		console.error('Error during DELETE request:', error);
 		throw error;
 	}
 };

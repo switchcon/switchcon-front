@@ -3,6 +3,9 @@ import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
 import { FaCirclePlus } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
+import { getAllGifticon } from '@api/GiftconAPI';
+import { Link } from 'react-router-dom';
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -21,6 +24,20 @@ const giftcons = [
 ];
 
 const Home = () => {
+	const [giftcons, setGiftcons] = useState([]);
+	const fetchGiftcons = async (sortType: string) => {
+		try {
+			const giftcons = await getAllGifticon(sortType);
+			setGiftcons(giftcons);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
+		fetchGiftcons('latest');
+	}, []);
+
 	return (
 		<>
 			<Header headline='스위치콘' navigaterOff>
@@ -34,7 +51,11 @@ const Home = () => {
 				</div>
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
-						return <GiftCard key={gifticon.exchangePost_id} gifticon={gifticon} />;
+						return (
+							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
+								<GiftCard gifticon={gifticon} />
+							</Link>
+						);
 					})}
 				</div>
 			</main>
