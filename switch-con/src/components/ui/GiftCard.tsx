@@ -1,4 +1,5 @@
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import { useState } from 'react';
 
 const GiftCard = ({
 	gifticon,
@@ -20,8 +21,6 @@ const GiftCard = ({
     ${hoverOff ? '' : 'hover:bg-slate-50 hover:ring hover:ring-[#44CD81] hover:ring-offset-0'} 
 
       ${selected ? 'ring ring-[#44CD81] ring-offset-0' : ''}
-      
-
     bg-white 
     rounded-md 
     px-4 
@@ -29,17 +28,14 @@ const GiftCard = ({
     flex 
     gap-2 
     shadow-md
-
-      cursor-pointer
-      relative
-
+    cursor-pointer
+    relative
   `;
-
 	return (
 		<section className={containerClassName} onClick={onClick}>
 			<div className='w-2/5 mr-2 overflow-hidden rounded-md'>
 				<AspectRatio.Root ratio={1 / 1}>
-					<img src={gifticon.gifticonImg} className='object-cover w-full h-full' />
+					<img src={`data:image/jpeg;base64,${gifticon.gifticonImg}`} className='object-cover w-full h-full' />
 				</AspectRatio.Root>
 			</div>
 			<div className='flex flex-col w-3/5 gap-1'>
