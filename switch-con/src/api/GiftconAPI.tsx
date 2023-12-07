@@ -9,7 +9,9 @@ const api = axios.create({
 	},
 });
 
+
 // 전체 기프티콘 조회
+
 export const getAllGifticon = async (sortType) => {
 	//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
 	try {
@@ -21,7 +23,9 @@ export const getAllGifticon = async (sortType) => {
 	}
 };
 
+
 //상세 기프티콘 조회
+
 export const getGifticon = async (gifticonId: number) => {
 	try {
 		const response = await api.get(`/gifticon/${gifticonId}`);
@@ -64,6 +68,7 @@ export const ocrPost = async (base64Image: string) => {
 		throw error;
 	}
 };
+
 
 //기프티콘 삭제
 export const gifticonDelete = async (gifticonId: number) => {

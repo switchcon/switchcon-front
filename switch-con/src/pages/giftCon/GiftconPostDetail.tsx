@@ -100,15 +100,19 @@ const GiftconPostDetail = () => {
 								</div>
 								<div className='flex flex-col'>
 									<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
+
 									<p className='text-sm font-medium '> {gifticon.price} 원</p>
 								</div>
 							</section>
+
 
 							<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
 								{/* 카카오 api key 요청 확인필요 현재 오류남 */}
 								<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
 								<div className='w-full'>
+
 									<NearbyStoreMap searchKeyword={gifticon.store} />
+
 								</div>
 							</section>
 							<AlertDialog>
