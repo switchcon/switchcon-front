@@ -1,7 +1,7 @@
 'use client';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -14,6 +14,9 @@ import {
 	AlertDialogTrigger,
 } from '@components/ui/alert-dialog';
 import { Button } from '@components/ui/button';
+import { Link } from 'react-router-dom';
+import { getAllGifticon } from '@api/GiftconAPI';
+import { gifticonExchangePost } from '@api/ExchangeAPI';
 
 const giftcons = [
 	{
@@ -73,13 +76,42 @@ const giftcons = [
 		modfied_at: '2023-11-24',
 	},
 ];
+
 const ExchangePostCreate = () => {
+	const [giftcons, setGiftcons] = useState([]);
+	const fetchGiftcons = async (sortType: string) => {
+		try {
+			const giftcons = await getAllGifticon(sortType);
+			setGiftcons(giftcons);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
+		fetchGiftcons('latest');
+	}, []);
+
 	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		// const response = await
+		try {
+			if (selectedGiftIcon) {
+				const selectedGift = giftcons.find((gifticon) => gifticon.gifticonId === selectedGiftIcon);
+
+				if (selectedGift) {
+					const response = await gifticonExchangePost(selectedGift.gifticonId, selectedGift.category);
+					setSelectedGiftIcon(response);
+				}
+			}
+		} catch (error) {
+			console.error(error);
+		}
+
 		console.log('Form submitted with gift icon:', selectedGiftIcon);
 	};
+
 	return (
 		<div className='pb-6 '>
 			<Header headline='교환 기프티콘 등록' />
@@ -91,15 +123,22 @@ const ExchangePostCreate = () => {
 					{giftcons.map((gifticon) => {
 						return (
 							<GiftCard
-								key={gifticon.exchangePost_id}
+								key={gifticon.gifticonId}
 								gifticon={gifticon}
-								onClick={() => setSelectedGiftIcon(gifticon.exchangePost_id)}
-								selected={selectedGiftIcon === gifticon.exchangePost_id}
+								onClick={() => setSelectedGiftIcon(gifticon.gifticonId)}
+								selected={selectedGiftIcon === gifticon.gifticonId}
 							>
-								<input type='radio' value={gifticon.exchangePost_id.toString()} hidden />
+								<input type='radio' value={gifticon.gifticonId.toString()} hidden />
 							</GiftCard>
 						);
 					})}
+					{/* {giftcons.map((gifticon) => {
+						return (
+							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
+								<GiftCard gifticon={gifticon} />
+							</Link>
+						);
+					})} */}
 				</form>
 			</main>
 			<AlertDialog>

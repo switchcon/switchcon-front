@@ -20,9 +20,40 @@ export const getAllExchangePost = async (sortType) => {
 	}
 };
 
-//exchange
+
 //교환 게시물 상세조회
+export const getGifticonDetailPost = async (exchangePostId: number) => {
+	try {
+		const response = await api.get(`/exchange/${exchangePostId}`);
+		return response.data.data;
+	} catch (error) {
+		console.error('Error during DELETE request:', error);
+		throw error;
+	}
+};
+
 //교환게시물삭제
-//교한 요청 등록
+export const gifticonExchangeDelete = async (exchangePostId: number) => {
+	try {
+		const response = await api.delete(`/exchange/${exchangePostId}`);
+		return response.data.status;
+	} catch (error) {
+		console.error('Error during DELETE request:', error);
+		throw error;
+	}
+};
+
+//교환 게시물 등록
+export const gifticonExchangePost = async (gifticonId: number, preference: string) => {
+	try {
+		const response = await api.post(`/exchange`, { gifticonId, preference });
+		return response.data.status;
+	} catch (error) {
+		console.error('Error during DELETE request:', error);
+		throw error;
+	}
+};
+
+
 //교환수락
 //교환 요청

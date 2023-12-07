@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const gifticonExSuccessPost = async (exchangePostId: string, exchangeRequestId: string) => {
+export const gifticonExSuccessPost = async (exchangePostId: number, exchangeRequestId: number) => {
 	try {
 		const result = await axios
 			.post(
