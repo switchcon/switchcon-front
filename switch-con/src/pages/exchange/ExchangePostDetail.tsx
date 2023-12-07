@@ -1,4 +1,4 @@
-import { getAllExchangePost, gifticonExchangeDelete } from '@api/ExchangeAPI';
+import { getAllExchangePost, getGifticonDetailPost, gifticonExchangeDelete } from '@api/ExchangeAPI';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import {
@@ -43,7 +43,7 @@ const ExchangePostDetail = () => {
 
 	const fetchGifticonDetail = async () => {
 		try {
-			const data = await getAllExchangePost(parseInt(id, 10));
+			const data = await getGifticonDetailPost(parseInt(id, 10));
 			setGifticon(data);
 		} catch (error) {
 			console.error();
@@ -68,15 +68,20 @@ const ExchangePostDetail = () => {
 		fetchGifticonDetail();
 	}, []);
 
+	// const isUserOwner = () => {
+	// 	// 게시물 소유자 여부 확인
+	// 	return isUserLoggedIn() && gifticon && gifticon.user_id === getCurrentUserId();
+	//   };
+
 	return (
 		<>
 			<Header headline={'교환 기프티콘 상세'} />
-			{giftcons && (
+			{gifticon && (
 				<main className='px-6 pt-16 pb-4'>
-					<div className='mt-2 mb-2 text-lg font-semibold'> {giftcons.product} </div>
+					<div className='mt-2 mb-2 text-lg font-semibold'> {gifticon.product} </div>
 					<div className='w-full mr-2 overflow-hidden rounded-md'>
 						<AspectRatio.Root ratio={1 / 1}>
-							<img src={giftcons.gifticon_img} className='object-cover w-full h-full' />
+							<img src={`data:image/jpeg;base64,${gifticon.gifticonImg}`} className='object-cover w-full h-full' />
 						</AspectRatio.Root>
 					</div>
 
@@ -86,23 +91,23 @@ const ExchangePostDetail = () => {
 							<div className='flex flex-col gap-1'>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>제품 종류</p>
-									<p className='text-sm'>{giftcons.product}</p>
+									<p className='text-sm'>{gifticon.product}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>사용처</p>
-									<p className='text-sm'>{giftcons.store}</p>
+									<p className='text-sm'>{gifticon.store}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>유효기간</p>
-									<p className='text-sm'>{giftcons.expiration_date}</p>
+									<p className='text-sm'>{gifticon.expiration_date}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>제품 금액</p>
-									<p className='text-sm'>{giftcons.price}</p>
+									<p className='text-sm'>{gifticon.price}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>교환선호제품</p>
-									<p className='text-sm'>{giftcons.category}</p>
+									<p className='text-sm'>{gifticon.category}</p>
 								</div>
 							</div>
 						</div>

@@ -48,9 +48,11 @@ const ExchangeHome = () => {
 				</div>
 			</main>
 			<Footer selectedMenu='exchange' />
-			<button className='w-[375px] fixed bottom-20 translate-x-72'>
-				<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
-			</button>
+			<Link to='/exchange-post'>
+				<button className='w-[375px] fixed bottom-20 translate-x-72'>
+					<FaCirclePlus size={'40'} className='text-brand-primary-normal hover:text-brand-primary-light' />
+				</button>
+			</Link>
 		</>
 	);
 };
