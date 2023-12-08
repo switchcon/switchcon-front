@@ -9,7 +9,6 @@ const api = axios.create({
 	},
 });
 
-
 // 전체 기프티콘 조회
 
 export const getAllGifticon = async (sortType) => {
@@ -22,7 +21,6 @@ export const getAllGifticon = async (sortType) => {
 		throw error;
 	}
 };
-
 
 //상세 기프티콘 조회
 
@@ -68,7 +66,6 @@ export const ocrPost = async (base64Image: string) => {
 		throw error;
 	}
 };
-
 
 //기프티콘 삭제
 export const gifticonDelete = async (gifticonId: number) => {

@@ -132,13 +132,6 @@ const ExchangePostCreate = () => {
 							</GiftCard>
 						);
 					})}
-					{/* {giftcons.map((gifticon) => {
-						return (
-							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
-								<GiftCard gifticon={gifticon} />
-							</Link>
-						);
-					})} */}
 				</form>
 			</main>
 			<AlertDialog>
