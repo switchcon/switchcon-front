@@ -99,7 +99,7 @@ const ExchangePostDetail = () => {
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>유효기간</p>
-									<p className='text-sm'>{gifticon.expiration_date}</p>
+									<p className='text-sm'>{gifticon.expireDate}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>제품 금액</p>
@@ -137,14 +137,14 @@ const ExchangePostDetail = () => {
 							<p className='mb-3 font-bold text-medium'>현재까지 교환신청 목록</p>
 							<hr className='mb-2' />
 							<div className='relative flex flex-col gap-2'>
+								{/* <GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />
-								<GiftCard gifticon={giftcons} hoverOff />
-								<GiftCard gifticon={giftcons} hoverOff />
+								<GiftCard gifticon={giftcons} hoverOff /> */}
 							</div>
 							{/* <button className='w-3/6 translate-x-40 z-48 sticky top-[700px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'> */}
 							<Button className='mt-4 mb-2'>
-								<Link to={`/exchange-request/${giftcons.exchangePost_id}`}>교환 신청</Link>
+								<Link to={`/exchange-request/${gifticon.exchangePost_id}`}>교환 신청</Link>
 							</Button>
 						</div>
 					</article>

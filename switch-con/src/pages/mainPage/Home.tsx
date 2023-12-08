@@ -6,6 +6,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import { getAllGifticon } from '@api/GiftconAPI';
 import { Link } from 'react-router-dom';
+import { Badge } from '@components/ui/badge';
 const giftcons = [
 	{
 		exchangePost_id: 1,
@@ -13,13 +14,13 @@ const giftcons = [
 		category: '음료',
 		store: '스타벅스',
 		product: '아메리카노',
-		expiration_date: '2024-01-01',
+		expireDate: '2024-01-01',
 		barcode_num: '1234567890',
 		price: 5000,
 		is_used: false,
 		is_active: true,
 		created_at: '2023-11-22',
-		modfied_at: '2023-11-22',
+		modfied_at: '2024-11-22',
 	},
 ];
 

@@ -61,3 +61,36 @@ export const signUp = async (accountId: string, password: string, checkPassword:
 
 	return result.data;
 };
+
+//교환 등록글 조회
+export const exchangePost = async () => {
+	try {
+		const result = await axios.get(`${BASE_URL}/mypage/exchangePosts`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('access')}`,
+				'Content-Type': 'application/json',
+			},
+		});
+
+		return result.data.data;
+	} catch (error) {
+		console.error('Error during exchangePost request:', error);
+		throw error;
+	}
+};
+
+//교환 신청글 조회
+export const exchangeRequest = async () => {
+	try {
+		const result = await axios.get(`${BASE_URL}/mypage/exchangeRequests`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('access')}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		return result.data.data;
+	} catch (error) {
+		console.error('Error during exchangeRequest request:', error);
+		throw error;
+	}
+};
