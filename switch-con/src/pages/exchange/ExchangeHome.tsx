@@ -7,6 +7,7 @@ import { FaCommentAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { getAllExchangePost } from '@api/ExchangeAPI';
 import { useState, useEffect } from 'react';
+import { Badge } from '@components/ui/badge';
 const ExchangeHome = () => {
 	const [exchangePosts, setExchangePosts] = useState([]);
 	const fetchPosts = async (sortType: string) => {
@@ -37,6 +38,7 @@ const ExchangeHome = () => {
 					{exchangePosts.map((post) => {
 						return (
 							<Link key={post.exchangePostId} to={`/exchange/${post.exchangePostId}`}>
+								<Badge>{[post.status]}</Badge>
 								<GiftCard gifticon={post} />
 								<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
 									<FaCommentAlt className='text-brand-primary-light' size={'18'} />

@@ -12,7 +12,7 @@ export const ExPost = async () => {
 			.then((result) => {
 				console.log('요청성공');
 				console.log(result);
-				return result.data;
+				return result.data.data;
 			})
 			.catch((error) => {
 				console.log('요청실패');

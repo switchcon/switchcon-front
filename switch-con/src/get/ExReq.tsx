@@ -12,14 +12,14 @@ export const ExReq = async () => {
 			.then((result) => {
 				console.log('요청성공');
 				console.log(result);
-				return result.data;
+				return result.data.data;
 			})
 			.catch((error) => {
 				console.log('요청실패');
 				console.log(error);
 			});
 
-		return result.data;
+		return result.data.data;
 	} catch (error) {
 		console.error('Error during DELETE request:', error);
 		throw error;
