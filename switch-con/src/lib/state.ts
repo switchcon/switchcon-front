@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 interface UserInfo {
 	memberId: number;
@@ -14,5 +14,13 @@ export const userInfo = atom<UserInfo>({
 		nickname: '',
 		exchangeCoin: 0,
 		notifyOn: true,
+	},
+});
+
+export const getUserId = selector({
+	key: 'getUserId',
+	get: ({ get }) => {
+		const user = get(userInfo);
+		return user.memberId;
 	},
 });

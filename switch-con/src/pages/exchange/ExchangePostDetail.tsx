@@ -1,4 +1,4 @@
-import { getAllExchangePost, getGifticonDetailPost, gifticonExchangeDelete } from '@api/ExchangeAPI';
+import { getGifticonDetailPost, gifticonExchangeDelete } from '@api/ExchangeAPI';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import {
@@ -6,17 +6,17 @@ import {
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogContent,
-	AlertDialogDescription,
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from '@components/ui/alert-dialog';
 import { Button } from '@components/ui/button';
-import NearbyStoreMap from '@lib/kakaoMap';
+import { getUserId } from '@lib/state';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 const giftcons = {
 	exchangePost_id: 1,
@@ -39,6 +39,7 @@ const ExchangePostDetail = () => {
 	//console.log('post ID', id);
 	//id값으로 교환상세페이지 데이터 호출
 	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
+	const current_memberId = useRecoilValue(getUserId); //현재 유저의 ID
 	const router = useNavigate();
 
 	const fetchGifticonDetail = async () => {
@@ -67,11 +68,6 @@ const ExchangePostDetail = () => {
 	useEffect(() => {
 		fetchGifticonDetail();
 	}, []);
-
-	// const isUserOwner = () => {
-	// 	// 게시물 소유자 여부 확인
-	// 	return isUserLoggedIn() && gifticon && gifticon.user_id === getCurrentUserId();
-	//   };
 
 	return (
 		<>
@@ -115,7 +111,7 @@ const ExchangePostDetail = () => {
 
 					<AlertDialog>
 						<AlertDialogTrigger>
-							<Button className='mt-4 mb-2'>게시물 삭제</Button>
+							{gifticon.memberid === current_memberId ? <Button className='mt-4 mb-2'>게시물 삭제</Button> : null}
 						</AlertDialogTrigger>
 						<AlertDialogContent>
 							<AlertDialogHeader>
