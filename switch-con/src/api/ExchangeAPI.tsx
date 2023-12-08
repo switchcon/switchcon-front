@@ -20,6 +20,7 @@ export const getAllExchangePost = async (sortType) => {
 	}
 };
 
+
 //교환 게시물 상세조회
 export const getGifticonDetailPost = async (exchangePostId: number) => {
 	try {
@@ -52,6 +53,7 @@ export const gifticonExchangePost = async (gifticonId: number, preference: strin
 		throw error;
 	}
 };
+
 
 //교환 요청
 export const gifticonExchangeRequestPost = async (gifticonId: number) => {
