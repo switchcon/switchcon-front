@@ -63,7 +63,9 @@ const ExchangePostDetail = () => {
 			console.error();
 		}
 	};
-
+	const handleExchangeAccept = async () => {
+		console.log('handle');
+	};
 	//처음 렌더링시 데이터 불러옴
 	useEffect(() => {
 		fetchGifticonDetail();
@@ -138,10 +140,31 @@ const ExchangePostDetail = () => {
 								<GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />
 							</div>
-							{/* <button className='w-3/6 translate-x-40 z-48 sticky top-[700px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'> */}
-							<Button className='mt-4 mb-2'>
-								<Link to={`/exchange-request/${giftcons.exchangePost_id}`}>교환 신청</Link>
-							</Button>
+							{/* 자신의 게시글이면 교환 수락 버튼, 아니면 교환 신청버튼 */}
+							{gifticon.memberId === current_memberId ? (
+								<AlertDialog>
+									<AlertDialogTrigger>
+										<Button className='mt-4 mb-2'>교환 수락</Button>
+									</AlertDialogTrigger>
+									<AlertDialogContent>
+										<AlertDialogHeader>
+											<AlertDialogTitle>해당 기프티콘으로 교환 수락하시겠습니까?</AlertDialogTitle>
+										</AlertDialogHeader>
+										<AlertDialogFooter>
+											<AlertDialogCancel>취소</AlertDialogCancel>
+											<AlertDialogAction asChild>
+												<Button onClick={handleExchangeAccept} form='exchange_post'>
+													확인
+												</Button>
+											</AlertDialogAction>
+										</AlertDialogFooter>
+									</AlertDialogContent>
+								</AlertDialog>
+							) : (
+								<Button className='mt-4 mb-2'>
+									<Link to={`/exchange-request/${giftcons.exchangePost_id}`}>교환 신청</Link>
+								</Button>
+							)}
 						</div>
 					</article>
 				</main>

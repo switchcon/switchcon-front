@@ -18,70 +18,15 @@ import { Link } from 'react-router-dom';
 import { getAllGifticon } from '@api/GiftconAPI';
 import { gifticonExchangePost } from '@api/ExchangeAPI';
 
-const giftcons = [
-	{
-		exchangePost_id: 1,
-		gifticon_img: '/images/image_url_1.jpg',
-		category: '음료',
-		store: '스타벅스',
-		product: '아메리카노',
-		expiration_date: '2024-01-01',
-		barcode_num: '1234567890',
-		price: 5000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-22',
-		modfied_at: '2023-11-22',
-	},
-	{
-		exchangePost_id: 2,
-		gifticon_img: '/images/image_url_2.jpg',
-		category: '디저트',
-		store: '배스킨라빈스',
-		product: '사랑에 빠진 딸기',
-		expiration_date: '2024-02-14',
-		barcode_num: '2345678901',
-		price: 8000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-23',
-		modfied_at: '2023-11-23',
-	},
-	{
-		exchangePost_id: 3,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expiration_date: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-	},
-	{
-		exchangePost_id: 4,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expiration_date: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-	},
-];
-
 const ExchangePostCreate = () => {
 	const [giftcons, setGiftcons] = useState([]);
+	const [showAlertModal, setShowAlertModal] = useState(false);
+	const [alertMessage, setAlertMessage] = useState('');
 	const fetchGiftcons = async (sortType: string) => {
 		try {
 			const giftcons = await getAllGifticon(sortType);
+			//active인 기프티콘만 등록가능하도록 리스트업.abs
+			// const activeGifticons = giftcons.filter((item) => item.active == true);
 			setGiftcons(giftcons);
 		} catch (error) {
 			console.error(error);
@@ -93,19 +38,20 @@ const ExchangePostCreate = () => {
 	}, []);
 
 	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		// const response = await
 		try {
 			if (selectedGiftIcon) {
-				const selectedGift = giftcons.find((gifticon) => gifticon.gifticonId === selectedGiftIcon);
-
-				if (selectedGift) {
-					const response = await gifticonExchangePost(selectedGift.gifticonId, selectedGift.category);
-					setSelectedGiftIcon(response);
+				const response = await gifticonExchangePost(selectedGiftIcon.gifticonId, selectedGiftIcon.category);
+				if (response === 200) {
+					setAlertMessage('교환게시글을 등록했습니다.');
+					setShowAlertModal(true);
 				}
 			}
 		} catch (error) {
+			setAlertMessage('교환게시글 등록에 실패했습니다.');
+			setShowAlertModal(true);
 			console.error(error);
 		}
 
@@ -157,8 +103,24 @@ const ExchangePostCreate = () => {
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
-
-			{/*교환신청 로직 */}
+			{/* 교환등록확인모달 */}
+			{showAlertModal && (
+				<AlertDialog>
+					<AlertDialogTrigger>
+						<Button id='alertDialogButton' className='hidden w-3/5' />
+					</AlertDialogTrigger>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							<AlertDialogTitle> {alertMessage}</AlertDialogTitle>
+						</AlertDialogHeader>
+						<AlertDialogFooter>
+							<AlertDialogAction asChild>
+								<Button onClick={() => setShowAlertModal(false)}>확인</Button>
+							</AlertDialogAction>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialog>
+			)}
 		</div>
 	);
 };
