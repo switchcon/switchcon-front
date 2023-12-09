@@ -121,25 +121,6 @@ const ExchangePostDetail = () => {
 						</div>
 					</section>
 
-					<AlertDialog>
-						<AlertDialogTrigger>
-							{gifticon.memberid === current_memberId ? <Button className='mt-4 mb-2'>게시물 삭제</Button> : null}
-						</AlertDialogTrigger>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								<AlertDialogTitle>게시물을 삭제하시겠습니까?</AlertDialogTitle>
-							</AlertDialogHeader>
-							<AlertDialogFooter>
-								<AlertDialogCancel>취소</AlertDialogCancel>
-								<AlertDialogAction asChild>
-									<Button onClick={handleGifticonDelete} form='exchange_post'>
-										확인
-									</Button>
-								</AlertDialogAction>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialog>
-
 					<article className='relative mt-5'>
 						<div className='py-2 '>
 							<p className='mb-3 font-bold text-medium'>현재까지 교환신청 목록</p>
@@ -164,24 +145,46 @@ const ExchangePostDetail = () => {
 							</div>
 							{/* 자신의 게시글이면 교환 수락 버튼, 아니면 교환 신청버튼 */}
 							{gifticon.memberId === current_memberId ? (
-								<AlertDialog>
-									<AlertDialogTrigger>
-										<Button className='mt-4 mb-2'>교환 수락</Button>
-									</AlertDialogTrigger>
-									<AlertDialogContent>
-										<AlertDialogHeader>
-											<AlertDialogTitle>해당 기프티콘으로 교환 수락하시겠습니까?</AlertDialogTitle>
-										</AlertDialogHeader>
-										<AlertDialogFooter>
-											<AlertDialogCancel>취소</AlertDialogCancel>
-											<AlertDialogAction asChild>
-												<Button onClick={handleExchangeAccept} form='exchange_post'>
-													확인
-												</Button>
-											</AlertDialogAction>
-										</AlertDialogFooter>
-									</AlertDialogContent>
-								</AlertDialog>
+								<div className='flex justify-between'>
+									<AlertDialog>
+										<AlertDialogTrigger>
+											<Button variant='redbtn' className='mt-4 mb-2'>
+												게시글 삭제
+											</Button>
+										</AlertDialogTrigger>
+										<AlertDialogContent>
+											<AlertDialogHeader>
+												<AlertDialogTitle>게시물을 삭제하시겠습니까?</AlertDialogTitle>
+											</AlertDialogHeader>
+											<AlertDialogFooter>
+												<AlertDialogCancel>취소</AlertDialogCancel>
+												<AlertDialogAction asChild>
+													<Button onClick={handleGifticonDelete} form='exchange_post'>
+														확인
+													</Button>
+												</AlertDialogAction>
+											</AlertDialogFooter>
+										</AlertDialogContent>
+									</AlertDialog>
+									<AlertDialog>
+										<AlertDialogTrigger>
+											<Button className='mt-4 mb-2'>교환 수락</Button>
+										</AlertDialogTrigger>
+										<AlertDialogContent>
+											<AlertDialogHeader>
+												<AlertDialogTitle>해당 기프티콘으로 교환 수락하시겠습니까?</AlertDialogTitle>
+											</AlertDialogHeader>
+											<AlertDialogFooter>
+												<AlertDialogCancel>취소</AlertDialogCancel>
+												<AlertDialogAction asChild>
+													<Button onClick={handleExchangeAccept} form='exchange_post'>
+														확인
+													</Button>
+												</AlertDialogAction>
+											</AlertDialogFooter>
+										</AlertDialogContent>
+									</AlertDialog>
+								</div>
 							) : (
 								<Button className='mt-4 mb-2'>
 									<Link to={`/exchange-request/${id}`}>교환 신청</Link>
