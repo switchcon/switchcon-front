@@ -5,8 +5,10 @@ const ExchangeReqCard = ({
 	hoverOff,
 	onClick,
 	selected,
+	children,
 }: {
 	gifticon: any;
+	children?: React.ReactNode;
 	hoverOff?: boolean;
 	onClick?: (event: React.MouseEvent) => void;
 	selected?: boolean;
@@ -36,6 +38,7 @@ const ExchangeReqCard = ({
 
 				<p className='text-sm font-semibold text-green-950'>{gifticon.expireDate}</p>
 				<p className='text-sm font-semibold text-green-800'>약 {gifticon.price} 원</p>
+				<div>{children}</div>
 			</div>
 		</section>
 	);

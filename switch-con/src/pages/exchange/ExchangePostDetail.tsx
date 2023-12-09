@@ -51,6 +51,9 @@ const ExchangePostDetail = () => {
 			console.error();
 		}
 	};
+	useEffect(() => {
+		console.log('selectedGiftIcon', selectedGiftIcon);
+	}, [selectedGiftIcon]);
 	const handleExchangeAccept = async () => {
 		try {
 			console.log('교환수락');
@@ -134,8 +137,10 @@ const ExchangePostDetail = () => {
 												key={reqGifticon.exchangeRequestId}
 												gifticon={reqGifticon}
 												onClick={() => setSelectedGiftIcon(reqGifticon)}
-												selected={selectedGiftIcon?.exchangeRequestId === gifticon.exchangeRequestId}
-											/>
+												selected={selectedGiftIcon?.exchangeRequestId === reqGifticon.exchangeRequestId}
+											>
+												<input type='radio' value={reqGifticon.exchangeRequestId.toString()} hidden />
+											</ExchangeReqCard>
 									  ))
 									: // 타인인 경우
 									  gifticon.reqListDTO.length > 0 &&
@@ -168,7 +173,9 @@ const ExchangePostDetail = () => {
 									</AlertDialog>
 									<AlertDialog>
 										<AlertDialogTrigger>
-											<Button className='mt-4 mb-2'>교환 수락</Button>
+											<Button className='mt-4 mb-2' disabled={!selectedGiftIcon}>
+												교환 수락
+											</Button>
 										</AlertDialogTrigger>
 										<AlertDialogContent>
 											<AlertDialogHeader>

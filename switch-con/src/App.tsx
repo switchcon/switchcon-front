@@ -9,7 +9,6 @@ import Login from '@pages/login/Login';
 import Signup from '@pages/login/Signup';
 
 import Home from '@pages/mainPage/Home';
-import Landing from '@pages/mainPage/Landing';
 import MyExchange from '@pages/myExchange/MyExchange';
 import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
@@ -19,7 +18,7 @@ const App = () => {
 		<RecoilRoot>
 			<Routes>
 				{/*랜딩페이지*/}
-				<Route path='/' element={<Landing />} />
+				<Route path='/' element={<Login />} />
 				{/*홈- 내가 등록한 기프티콘 보는 곳 */}
 				<Route path='/login' element={<Login />} />
 				<Route path='/signup' element={<Signup />} />

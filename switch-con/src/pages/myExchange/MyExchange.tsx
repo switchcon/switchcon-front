@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
 import { Badge } from '@components/ui/badge';
+
 import { exchangePost, exchangeRequest } from '@api/UserAPI';
 
 const MyExchange = () => {
@@ -56,7 +57,11 @@ const MyExchange = () => {
 						<div className='flex flex-col'>
 							{giftcon.map((gifticon) => {
 								return (
-									<Link key={gifticon.gifticonId} to={`/exchange/${gifticon.exchangePostId}`}>
+									<Link
+										style={gifticon.status != 'COMPLETE' ? {} : { pointerEvents: 'none' }}
+										key={gifticon.gifticonId}
+										to={`/exchange/${gifticon.exchangePostId}`}
+									>
 										<Badge>{[gifticon.status]}</Badge>
 										<GiftCard
 											gifticon={gifticon}

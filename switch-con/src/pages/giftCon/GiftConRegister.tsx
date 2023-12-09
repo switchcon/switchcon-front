@@ -18,11 +18,11 @@ import { useNavigate } from 'react-router';
 const default_img = '/images/defaultImg.png';
 
 // const category_list = {
-// 	cafe: '커피/음료',
-// 	bakery: '베이커리/도넛',
-// 	chicken: '치킨/피자',
-// 	beauty: '뷰티',
-// 	culture: '도서/문화/영화/음악',
+//    cafe: '커피/음료',
+//    bakery: '베이커리/도넛',
+//    chicken: '치킨/피자',
+//    beauty: '뷰티',
+//    culture: '도서/문화/영화/음악',
 // };
 const formatDate = (dateString) => {
 	const date = new Date(dateString);
@@ -54,7 +54,7 @@ const GiftconRegisterPage = () => {
 					setAnalyzedGifticon(ocrAnalysis.data);
 				} else {
 					console.log('ocr 에러');
-					setAlertMessage('유효하지 않은 기프티콘입니다. (유효기간 만료)');
+					setAlertMessage('유효하지 않은 기프티콘입니다. (유효기간 만료 또는 옳지않은 형식)');
 					setShowAlertModal(true);
 				}
 			};
@@ -143,23 +143,23 @@ const GiftconRegisterPage = () => {
 							<div className='flex justify-between'>
 								<p className='text-sm font-medium '> {analyzedGifticon.category}</p>
 								{/* <Select>
-									<SelectTrigger className='w-[150px]'>
-										<SelectValue placeholder='직접선택' />
-									</SelectTrigger>
-									<SelectContent>
-										{Object.entries(category_list).map(([key, value]) => (
-											<SelectItem
-												key={key}
-												value={key}
-												onChange={() => {
-													setCategory(value); //변경시 카테고리 반영안됨.
-												}}
-											>
-												{value}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select> */}
+                          <SelectTrigger className='w-[150px]'>
+                              <SelectValue placeholder='직접선택' />
+                          </SelectTrigger>
+                          <SelectContent>
+                              {Object.entries(category_list).map(([key, value]) => (
+                                <SelectItem
+                                    key={key}
+                                    value={key}
+                                    onChange={() => {
+                                       setCategory(value); //변경시 카테고리 반영안됨.
+                                    }}
+                                >
+                                    {value}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        </Select> */}
 							</div>
 						</div>
 						<div className='flex flex-col'>

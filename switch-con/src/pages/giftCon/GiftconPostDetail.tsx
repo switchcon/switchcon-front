@@ -5,7 +5,6 @@ import {
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogContent,
-	AlertDialogDescription,
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
@@ -16,7 +15,6 @@ import NearbyStoreMap from '@lib/kakaoMap';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-const default_img = '/images/defaultImg.jpg';
 
 const GiftconPostDetail = () => {
 	const { id } = useParams();

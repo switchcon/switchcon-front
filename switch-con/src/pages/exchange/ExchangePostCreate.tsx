@@ -41,6 +41,16 @@ const ExchangePostCreate = () => {
 		fetchGiftcons('latest');
 	}, []);
 
+	useEffect(() => {
+		if (showAlertModal) {
+			const alertDialogButton = document.getElementById('alertDialogButton');
+			if (alertDialogButton) {
+				alertDialogButton.click();
+				console.log(showAlertModal);
+			}
+		}
+	}, [showAlertModal]);
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
