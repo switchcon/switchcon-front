@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
 import { Badge } from '@components/ui/badge';
 
-import { exchangePost, exchangeRequest } from '@api/UserAPI';
+import { exchangePost, exchangeRequest } from '@api/UserApi';
 
 const MyExchange = () => {
 	const [giftcon, setGiftcons] = useState([]);

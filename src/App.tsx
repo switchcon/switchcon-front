@@ -10,7 +10,7 @@ import Signup from '@pages/login/Signup';
 
 import Home from '@pages/mainPage/Home';
 import MyExchange from '@pages/myExchange/MyExchange';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 const App = () => {
