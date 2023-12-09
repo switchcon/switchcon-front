@@ -35,7 +35,6 @@ const ExchangeRequest = () => {
 			setGiftcons(availableGiftcons);
 
 			console.log('giftcons', giftcons);
-
 		} catch (error) {
 			console.error(error);
 		}

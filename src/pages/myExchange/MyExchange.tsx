@@ -10,7 +10,6 @@ import { Badge } from '@components/ui/badge';
 
 import { exchangePost, exchangeRequest } from '@api/UserAPI';
 
-
 const MyExchange = () => {
 	const [giftcon, setGiftcons] = useState([]);
 	const fetchExchangePost = async () => {
