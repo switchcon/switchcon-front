@@ -69,6 +69,7 @@ const ExchangePostDetail = () => {
 	//처음 렌더링시 데이터 불러옴
 	useEffect(() => {
 		fetchGifticonDetail();
+		console.log('current_memberId', current_memberId);
 	}, []);
 
 	return (
