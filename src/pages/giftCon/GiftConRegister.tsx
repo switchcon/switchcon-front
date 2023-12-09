@@ -54,7 +54,7 @@ const GiftconRegisterPage = () => {
 					setAnalyzedGifticon(ocrAnalysis.data);
 				} else {
 					console.log('ocr 에러');
-					setAlertMessage('유효하지 않은 기프티콘입니다. (유효기간 만료 또는 옳지않은 형식)');
+					setAlertMessage('유효하지 않은 기프티콘입니다. (유효기간 만료)');
 					setShowAlertModal(true);
 				}
 			};
