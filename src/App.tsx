@@ -9,15 +9,14 @@ import Login from '@pages/login/Login';
 import Signup from '@pages/login/Signup';
 
 import Home from '@pages/mainPage/Home';
-import Landing from '@pages/mainPage/Landing';
 import MyExchange from '@pages/myExchange/MyExchange';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 const App = () => {
 	return (
-		<RecoilRoot >
-			<Routes >
+		<RecoilRoot>
+			<Router basename={process.env.PUBLIC_URL}>
 				{/*랜딩페이지*/}
 				<Route path='/' element={<Login />} />
 				{/*홈- 내가 등록한 기프티콘 보는 곳 */}
@@ -34,7 +33,7 @@ const App = () => {
 				{/*교환 요청페이지. 기프티콘 상세에서 교환신청 버튼으로 이동. id값: 기프티콘 게시글 id */}
 				<Route path='/exchange-post' element={<ExchangePostCreate />} /> {/*교환 게시글 작성 */}
 				<Route path='/my-con' element={<MyExchange />} /> {/*내콘 화면 */}
-			</Routes>
+			</Router>
 		</RecoilRoot>
 	);
 };
