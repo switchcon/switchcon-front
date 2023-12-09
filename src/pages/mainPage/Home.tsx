@@ -37,8 +37,12 @@ const Home = () => {
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
 						return (
-							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
-								<GiftCard gifticon={gifticon} />
+							<Link
+								style={gifticon.active ? {} : { pointerEvents: 'none' }}
+								key={gifticon.giftconId}
+								to={`/home/giftcon/${gifticon.gifticonId}`}
+							>
+								<GiftCard gifticon={gifticon} progress={!gifticon.active} />
 							</Link>
 						);
 					})}
