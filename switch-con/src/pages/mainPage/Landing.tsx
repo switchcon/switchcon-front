@@ -1,13 +1,5 @@
 import { Button } from '@components/ui/button';
 
-import { ExPost } from '@get/ExPost';
-import { ExReq } from '@get/ExReq';
-import { gifticonAll } from '@get/gifticonAll';
-
-import { gifticonExAll } from '@get/gifticonExAll';
-import { userInfo } from '@get/userInfo';
-
-
 import axios from 'axios';
 
 // import { gifticonExReqDelete } from 'delete/gifticonExReqDelete';
@@ -35,17 +27,6 @@ const Landing = () => {
 	return (
 		<div>
 			<Button>로딩중</Button>
-
-			<Button onClick={userInfo}>userInfo get test</Button>
-			<Button onClick={() => gifticonExAll('all')}>gifiticonExALL get test</Button>
-
-			<Button onClick={() => gifticonAll('expiringSoon')}>gifticonAll get test</Button>
-			<Button onClick={ExPost}>ExPost get test</Button>
-			<Button onClick={ExReq}>ExReq get test</Button>
-
-
-
-
 
 			{/* <Button onClick={() => gifticonExReqDelete(6, 6)}>gifticonExReqDelete delete test</Button> */}
 		</div>

@@ -14,75 +14,24 @@ import {
 	AlertDialogTrigger,
 } from '@components/ui/alert-dialog';
 import { Button } from '@components/ui/button';
-import { Link } from 'react-router-dom';
 import { getAllGifticon } from '@api/GiftconAPI';
 import { gifticonExchangePost } from '@api/ExchangeAPI';
-
-const giftcons = [
-	{
-		exchangePost_id: 1,
-		gifticon_img: '/images/image_url_1.jpg',
-		category: '음료',
-		store: '스타벅스',
-		product: '아메리카노',
-		expireDate: '2024-01-01',
-		barcode_num: '1234567890',
-		price: 5000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-22',
-		modfied_at: '2023-11-22',
-	},
-	{
-		exchangePost_id: 2,
-		gifticon_img: '/images/image_url_2.jpg',
-		category: '디저트',
-		store: '배스킨라빈스',
-		product: '사랑에 빠진 딸기',
-		expireDate: '2024-02-14',
-		barcode_num: '2345678901',
-		price: 8000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-23',
-		modfied_at: '2023-11-23',
-	},
-	{
-		exchangePost_id: 3,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expireDate: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-	},
-	{
-		exchangePost_id: 4,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expireDate: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-	},
-];
+import { useNavigate } from 'react-router-dom';
 
 const ExchangePostCreate = () => {
+	const router = useNavigate();
+
 	const [giftcons, setGiftcons] = useState([]);
+	const [showAlertModal, setShowAlertModal] = useState(false);
+	const [alertMessage, setAlertMessage] = useState('');
+	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
+
 	const fetchGiftcons = async (sortType: string) => {
 		try {
 			const giftcons = await getAllGifticon(sortType);
-			setGiftcons(giftcons);
+			//active인 기프티콘만 등록가능하도록 리스트업.abs
+			const activeGifticons = giftcons.filter((item) => item.active == true);
+			setGiftcons(activeGifticons);
 		} catch (error) {
 			console.error(error);
 		}
@@ -92,36 +41,28 @@ const ExchangePostCreate = () => {
 		fetchGiftcons('latest');
 	}, []);
 
-	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
-	const [exchangeStatus, setExchangeStatus] = useState(null);
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		// const response = await
 		try {
-			if (exchangeStatus === 'registering') {
-				console.log('이미 교환 등록 중입니다.');
-				return;
-			}
-
 			if (selectedGiftIcon) {
-				setExchangeStatus('registering'); // 교환 등록 중인 상태로 변경
-
-				const selectedGift = giftcons.find((gifticon) => gifticon.gifticonId === selectedGiftIcon);
-
-				if (selectedGift) {
-					const response = await gifticonExchangePost(selectedGift.gifticonId, selectedGift.category);
-					setSelectedGiftIcon(response);
+				const response = await gifticonExchangePost(selectedGiftIcon.gifticonId, selectedGiftIcon.category);
+				if (response === 200) {
+					setAlertMessage('교환게시글을 등록했습니다.');
+					setShowAlertModal(true);
 				}
 			}
 		} catch (error) {
+			setAlertMessage('교환게시글 등록에 실패했습니다.');
+			setShowAlertModal(true);
 			console.error(error);
-		} finally {
-			setExchangeStatus(null); // 교환 등록 상태 초기화
 		}
-
-		console.log('Form submitted with gift icon:', selectedGiftIcon);
 	};
-
+	const onClickModal = () => {
+		setShowAlertModal(false); //postReq가 정상요청되었으면 /home 으로 이동, 기프티콘 등록실패일 경우 모달창만 닫기.
+		if (alertMessage === '교환게시글을 등록했습니다.') {
+			router('/exchange-home');
+		}
+	};
 	return (
 		<div className='pb-6 '>
 			<Header headline='교환 기프티콘 등록' />
@@ -132,30 +73,24 @@ const ExchangePostCreate = () => {
 				<form onSubmit={handleSubmit} id='exchange_post' className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
 						return (
-							<>
-								<GiftCard
-									key={gifticon.gifticonId}
-									gifticon={gifticon}
-									onClick={() => setSelectedGiftIcon(gifticon.gifticonId)}
-									selected={selectedGiftIcon === gifticon.gifticonId}
-								>
-									<input type='radio' value={gifticon.gifticonId.toString()} hidden />
-								</GiftCard>
-							</>
+							<GiftCard
+								key={gifticon.gifticonId}
+								gifticon={gifticon}
+								onClick={() => setSelectedGiftIcon(gifticon)}
+								selected={selectedGiftIcon?.gifticonId === gifticon.gifticonId}
+							>
+								<input type='radio' value={gifticon.gifticonId.toString()} hidden />
+							</GiftCard>
 						);
 					})}
 				</form>
-				{/* {giftcons.map((gifticon) => {
-						return (
-							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
-								<GiftCard gifticon={gifticon} />
-							</Link>
-						);
-					})} */}
 			</main>
 			<AlertDialog>
 				<AlertDialogTrigger>
-					<button className='fixed bottom-4 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
+					<button
+						disabled={!selectedGiftIcon}
+						className='fixed bottom-4 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
+					>
 						교환 등록
 					</button>
 				</AlertDialogTrigger>
@@ -176,8 +111,24 @@ const ExchangePostCreate = () => {
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
-
-			{/*교환신청 로직 */}
+			{/* 교환등록확인모달 */}
+			{showAlertModal && (
+				<AlertDialog>
+					<AlertDialogTrigger>
+						<Button id='alertDialogButton' className='hidden w-3/5' />
+					</AlertDialogTrigger>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							<AlertDialogTitle> {alertMessage}</AlertDialogTitle>
+						</AlertDialogHeader>
+						<AlertDialogFooter>
+							<AlertDialogAction asChild>
+								<Button onClick={onClickModal}>확인</Button>
+							</AlertDialogAction>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialog>
+			)}
 		</div>
 	);
 };

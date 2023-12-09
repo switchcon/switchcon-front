@@ -7,69 +7,7 @@ import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
 import { Badge } from '@components/ui/badge';
-import { exchangePost, exchangeRequest } from '@api/UserAPI';
-
-const giftcons = [
-	{
-		exchangePost_id: 1,
-		gifticon_img: '/images/image_url_1.jpg',
-		category: '음료',
-		store: '스타벅스',
-		product: '아메리카노',
-		expiration_date: '2024-01-01',
-		barcode_num: '1234567890',
-		price: 5000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-22',
-		modfied_at: '2023-11-22',
-		exchangeReq_count: 3,
-		status: 'rejected',
-	},
-	{
-		exchangePost_id: 2,
-		gifticon_img: '/images/image_url_2.jpg',
-		category: '디저트',
-		store: '배스킨라빈스',
-		product: '사랑에 빠진 딸기',
-		expiration_date: '2024-02-14',
-		barcode_num: '2345678901',
-		price: 8000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-23',
-		modfied_at: '2023-11-23',
-		exchangeReq_count: 4,
-		status: 'accepted',
-	},
-	{
-		exchangePost_id: 3,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expiration_date: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-		exchangeReq_count: 6,
-		status: 'waiting',
-	},
-];
-
-const post_status = {
-	in_progress: '진행중',
-	complete: '완료',
-	cancle: '취소',
-};
-const status = {
-	waiting: '대기중',
-	accepted: '수락됨',
-	rejected: '거절됨',
-};
+import { exchangePost, exchangeRequest } from '@api/UserApi';
 
 const MyExchange = () => {
 	const [giftcon, setGiftcons] = useState([]);

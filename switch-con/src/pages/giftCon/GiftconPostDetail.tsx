@@ -18,25 +18,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 const default_img = '/images/defaultImg.jpg';
 
-const giftcon = {
-	exchangePost_id: 1,
-	gifticon_img: '/images/image_url_1.jpg',
-	category: '식품/음료',
-	store: '스타벅스',
-	product: '아메리카노',
-	expiration_date: '2024-01-01',
-	barcode_num: '1234567890',
-	price: 5000,
-	is_used: false,
-	is_active: true,
-	created_at: '2023-11-22',
-	modfied_at: '2023-11-22',
-	exchangeReq_count: 3,
-};
-
 const GiftconPostDetail = () => {
 	const { id } = useParams();
 	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
+	const [showAlertModal, setShowAlertModal] = useState(false);
+	const [AlertMessage, setAlertMessage] = useState('');
+
 	const router = useNavigate();
 
 	const fetchGifticonDetail = async () => {
@@ -54,10 +41,15 @@ const GiftconPostDetail = () => {
 			console.log(response_status);
 			if (response_status >= 200 && response_status < 300) {
 				console.log('삭제성공');
-				router('/home');
+				setAlertMessage('삭제되었습니다.');
+				setShowAlertModal(true);
+			} else {
+				console.log('delete error');
+				setAlertMessage('교환중인 기프티콘은 삭제가 불가합니다.');
+				setShowAlertModal(true);
 			}
 		} catch (error) {
-			console.error();
+			console.log('delete error');
 		}
 	};
 
@@ -65,6 +57,18 @@ const GiftconPostDetail = () => {
 	useEffect(() => {
 		fetchGifticonDetail();
 	}, []);
+
+	//모달에서 삭제버튼 누를시 결과 띄워줄 부분
+	useEffect(() => {
+		if (showAlertModal) {
+			const alertDialogButton = document.getElementById('alertDialogButton');
+			if (alertDialogButton) {
+				alertDialogButton.click();
+				console.log(showAlertModal);
+			}
+		}
+	}, [showAlertModal]);
+
 	return (
 		<div>
 			<Header headline={'기프티콘 조회'} />
@@ -79,64 +83,83 @@ const GiftconPostDetail = () => {
 						</AspectRatio.Root>
 					</div>
 					<div className='mt-2 mb-2 text-lg font-semibold'>기프티콘 정보</div>
-					{gifticon && (
-						<>
-							<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-								<div className='flex flex-col'>
-									<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
-									<p className='text-sm font-medium '> {gifticon.category}</p>
-								</div>
-								<div className='flex flex-col'>
-									<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
-									<p className='text-sm font-medium '> {gifticon.store}</p>
-								</div>
-								<div className='flex flex-col'>
-									<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
-									<p className='text-sm font-medium '> {gifticon.product}</p>
-								</div>
-								<div className='flex flex-col'>
-									<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
-									<p className='text-sm font-medium '> {gifticon.expireDate} 까지</p>
-								</div>
-								<div className='flex flex-col'>
-									<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
+					<>
+						<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 제품 종류</p>
+								<p className='text-sm font-medium '> {gifticon.category}</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 사용처</p>
+								<p className='text-sm font-medium '> {gifticon.store}</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 제품명</p>
+								<p className='text-sm font-medium '> {gifticon.product}</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 유효기간</p>
+								<p className='text-sm font-medium '> {gifticon.expireDate} 까지</p>
+							</div>
+							<div className='flex flex-col'>
+								<p className='mb-2 text-sm font-semibold text-green-900'> 제품금액</p>
 
-									<p className='text-sm font-medium '> {gifticon.price} 원</p>
-								</div>
-							</section>
+								<p className='text-sm font-medium '> {gifticon.price} 원</p>
+							</div>
+						</section>
 
-
-							<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
-								{/* 카카오 api key 요청 확인필요 현재 오류남 */}
-								<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
-								<div className='w-full'>
-
-									<NearbyStoreMap searchKeyword={gifticon.store} />
-
-								</div>
-							</section>
-							<AlertDialog>
-								<AlertDialogTrigger>
-									<Button className='mt-4 mb-2'>기프티콘 삭제</Button>
-								</AlertDialogTrigger>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										<AlertDialogTitle>기프티콘을 삭제하시겠습니까?</AlertDialogTitle>
-									</AlertDialogHeader>
-									<AlertDialogFooter>
-										<AlertDialogCancel>취소</AlertDialogCancel>
-										<AlertDialogAction asChild>
-											<Button onClick={handleGifticonDelete} form='exchange_post'>
-												확인
-											</Button>
-										</AlertDialogAction>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialog>
-						</>
-					)}
+						<section className='flex flex-col gap-4 px-2 py-3 bg-white rounded-md'>
+							{/* 카카오 api key 요청 확인필요 현재 오류남 */}
+							<div className='mt-2 mb-2 text-lg font-semibold'>내주변 사용처</div>
+							<div className='w-full'>
+								<NearbyStoreMap searchKeyword={gifticon.store} />
+							</div>
+						</section>
+					</>
 				</main>
 			)}
+
+			<AlertDialog>
+				<AlertDialogTrigger>
+					<Button className='mt-4 mb-2'>기프티콘 삭제</Button>
+				</AlertDialogTrigger>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>기프티콘을 삭제하시겠습니까?</AlertDialogTitle>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel>취소</AlertDialogCancel>
+						<AlertDialogAction asChild>
+							<Button onClick={handleGifticonDelete} form='exchange_post'>
+								확인
+							</Button>
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
+			{/* 기프티콘 삭제 요청 후 성공 실패 확인 모달 */}
+
+			<AlertDialog>
+				<AlertDialogTrigger>
+					<Button id='alertDialogButton' className='hidden w-3/5' />
+				</AlertDialogTrigger>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle> {AlertMessage}</AlertDialogTitle>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogAction asChild>
+							<Button
+								onClick={() => {
+									router('/home');
+								}}
+							>
+								확인
+							</Button>
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</div>
 	);
 };

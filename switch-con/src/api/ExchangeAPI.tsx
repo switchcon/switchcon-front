@@ -20,7 +20,6 @@ export const getAllExchangePost = async (sortType) => {
 	}
 };
 
-
 //교환 게시물 상세조회
 export const getGifticonDetailPost = async (exchangePostId: number) => {
 	try {
@@ -46,6 +45,7 @@ export const gifticonExchangeDelete = async (exchangePostId: number) => {
 //교환 게시물 등록
 export const gifticonExchangePost = async (gifticonId: number, preference: string) => {
 	try {
+		console.log('gifticonId', gifticonId, preference);
 		const response = await api.post(`/exchange`, { gifticonId, preference });
 		return response.data.status;
 	} catch (error) {
@@ -54,14 +54,14 @@ export const gifticonExchangePost = async (gifticonId: number, preference: strin
 	}
 };
 
-
+//교환수락
 //교환 요청
-export const gifticonExchangeRequestPost = async (gifticonId: number) => {
+export const gifticonExchangeRequestPost = async (exchangePostId: number, gifticonId: number) => {
 	try {
-		const response = await api.post(`/exchange/{exchangePostId}/request`, { gifticonId });
+		const response = await api.post(`/exchange/${exchangePostId}/request`, { gifticonId });
 		return response.data.status;
 	} catch (error) {
-		console.error('Error during DELETE request:', error);
+		console.error('Error during gifticonExchangeRequestPost', error);
 		throw error;
 	}
 };

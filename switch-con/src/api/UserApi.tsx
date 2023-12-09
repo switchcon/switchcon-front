@@ -62,6 +62,22 @@ export const signUp = async (accountId: string, password: string, checkPassword:
 	return result.data;
 };
 
+//사용자 정보조회
+export const getUserInfo = async () => {
+	try {
+		const result = await axios.get(`${BASE_URL}/mypage/info`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('access')}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		return result.data.data;
+	} catch (error) {
+		console.error('Error during get userInfo request:', error);
+		throw error;
+	}
+};
+
 //교환 등록글 조회
 export const exchangePost = async () => {
 	try {

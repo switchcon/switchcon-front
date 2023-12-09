@@ -9,7 +9,6 @@ const api = axios.create({
 	},
 });
 
-
 // 전체 기프티콘 조회
 
 export const getAllGifticon = async (sortType) => {
@@ -22,7 +21,6 @@ export const getAllGifticon = async (sortType) => {
 		throw error;
 	}
 };
-
 
 //상세 기프티콘 조회
 
@@ -62,13 +60,12 @@ export const ocrPost = async (base64Image: string) => {
 			gifticonImg: base64Image,
 		});
 		console.log('ocr', response.data);
-		return response.data.data;
+		return response.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
-		throw error;
+		return error.response.status;
 	}
 };
-
 
 //기프티콘 삭제
 export const gifticonDelete = async (gifticonId: number) => {
@@ -76,7 +73,6 @@ export const gifticonDelete = async (gifticonId: number) => {
 		const response = await api.delete(`/gifticon/${gifticonId}`);
 		return response.data.status;
 	} catch (error) {
-		console.error('Error during DELETE request:', error);
-		throw error;
+		return error.response.status;
 	}
 };
