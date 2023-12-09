@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/switchcon-front/static/css/main.a96c6ab0.css",
-    "main.js": "/switchcon-front/static/js/main.d104abbd.js",
+    "main.js": "/switchcon-front/static/js/main.6e7b6aa4.js",
     "index.html": "/switchcon-front/index.html",
     "main.a96c6ab0.css.map": "/switchcon-front/static/css/main.a96c6ab0.css.map",
-    "main.d104abbd.js.map": "/switchcon-front/static/js/main.d104abbd.js.map"
+    "main.6e7b6aa4.js.map": "/switchcon-front/static/js/main.6e7b6aa4.js.map"
   },
   "entrypoints": [
     "static/css/main.a96c6ab0.css",
-    "static/js/main.d104abbd.js"
+    "static/js/main.6e7b6aa4.js"
   ]
 }
