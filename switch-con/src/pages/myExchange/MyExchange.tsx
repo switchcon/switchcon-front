@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
 import { Badge } from '@components/ui/badge';
-import { exchangePost, exchangeRequest } from '@api/UserApi';
+
+import { exchangePost, exchangeRequest } from '@api/UserAPI';
+
 
 const MyExchange = () => {
 	const [giftcon, setGiftcons] = useState([]);
@@ -64,6 +66,7 @@ const MyExchange = () => {
 											exchanged={gifticon.status === 'COMPLETE'}
 											rejected={gifticon.status === 'REJECTED'}
 										/>
+
 										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px] z-10'>
 											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
 											{gifticon.requestCnt}

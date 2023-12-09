@@ -6,29 +6,13 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import { getAllGifticon } from '@api/GiftconAPI';
 import { Link } from 'react-router-dom';
-import { Badge } from '@components/ui/badge';
-const giftcons = [
-	{
-		exchangePost_id: 1,
-		gifticon_img: '/images/image_url_1.jpg',
-		category: '음료',
-		store: '스타벅스',
-		product: '아메리카노',
-		expireDate: '2024-01-01',
-		barcode_num: '1234567890',
-		price: 5000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-22',
-		modfied_at: '2024-11-22',
-	},
-];
 
 const Home = () => {
 	const [giftcons, setGiftcons] = useState([]);
 	const fetchGiftcons = async (sortType: string) => {
 		try {
 			const giftcons = await getAllGifticon(sortType);
+			console.log('giftcons', giftcons);
 			setGiftcons(giftcons);
 		} catch (error) {
 			console.error(error);
@@ -53,8 +37,12 @@ const Home = () => {
 				<div className='flex flex-col gap-2'>
 					{giftcons.map((gifticon) => {
 						return (
-							<Link key={gifticon.giftconId} to={`/home/giftcon/${gifticon.gifticonId}`}>
-								<GiftCard gifticon={gifticon} />
+							<Link
+								style={gifticon.active ? {} : { pointerEvents: 'none' }}
+								key={gifticon.giftconId}
+								to={`/home/giftcon/${gifticon.gifticonId}`}
+							>
+								<GiftCard gifticon={gifticon} progress={!gifticon.active} />
 							</Link>
 						);
 					})}

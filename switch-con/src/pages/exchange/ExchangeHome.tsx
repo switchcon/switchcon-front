@@ -36,8 +36,17 @@ const ExchangeHome = () => {
 				<div className='flex flex-col'>
 					{exchangePosts.map((post) => {
 						return (
+
+							<Link
+								style={post.status != 'COMPLETE' ? {} : { pointerEvents: 'none' }}
+								key={post.exchangePostId}
+								to={`/exchange/${post.exchangePostId}`}
+							>
+								<GiftCard gifticon={post} exchanged={post.status === 'COMPLETE'} />
+
 							<Link key={post.exchangePostId} to={`/exchange/${post.exchangePostId}`}>
 								<GiftCard gifticon={post} />
+
 								<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
 									<FaCommentAlt className='text-brand-primary-light' size={'18'} />
 									{post.requestCnt}

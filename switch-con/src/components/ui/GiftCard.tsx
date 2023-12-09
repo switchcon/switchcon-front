@@ -10,6 +10,8 @@ const GiftCard = ({
 	exchanged,
 	accepted,
 	rejected,
+	waiting,
+	progress,
 }: {
 	gifticon: any;
 	children?: React.ReactNode;
@@ -19,6 +21,8 @@ const GiftCard = ({
 	exchanged?: boolean;
 	accepted?: boolean;
 	rejected?: boolean;
+	waiting?: boolean;
+	progress?: boolean;
 }) => {
 	const containerClassName = `
     w-full 
@@ -76,6 +80,16 @@ const GiftCard = ({
 			{rejected && (
 				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
 					<p className='text-lg font-bold'>교환거절</p>
+				</div>
+			)}
+			{waiting && (
+				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
+					<p className='text-lg font-bold'>교환요청 대기중</p>
+				</div>
+			)}
+			{progress && (
+				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
+					<p className='text-lg font-bold'>등록중</p>
 				</div>
 			)}
 		</section>
