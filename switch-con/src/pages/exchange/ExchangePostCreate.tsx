@@ -41,6 +41,18 @@ const ExchangePostCreate = () => {
 		fetchGiftcons('latest');
 	}, []);
 
+
+	useEffect(() => {
+		if (showAlertModal) {
+			const alertDialogButton = document.getElementById('alertDialogButton');
+			if (alertDialogButton) {
+				alertDialogButton.click();
+				console.log(showAlertModal);
+			}
+		}
+	}, [showAlertModal]);
+
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
@@ -89,7 +101,10 @@ const ExchangePostCreate = () => {
 				<AlertDialogTrigger>
 					<button
 						disabled={!selectedGiftIcon}
+
 						className='fixed bottom-4 hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
+
+	
 					>
 						교환 등록
 					</button>
