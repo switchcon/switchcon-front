@@ -8,6 +8,8 @@ const GiftCard = ({
 	onClick,
 	selected,
 	exchanged,
+	accepted,
+	rejected,
 }: {
 	gifticon: any;
 	children?: React.ReactNode;
@@ -15,6 +17,8 @@ const GiftCard = ({
 	onClick?: (event: React.MouseEvent) => void;
 	selected?: boolean;
 	exchanged?: boolean;
+	accepted?: boolean;
+	rejected?: boolean;
 }) => {
 	const containerClassName = `
     w-full 
@@ -62,6 +66,16 @@ const GiftCard = ({
 			{exchanged && (
 				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
 					<p className='text-lg font-bold'>교환완료</p>
+				</div>
+			)}
+			{accepted && (
+				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
+					<p className='text-lg font-bold'>교환수락</p>
+				</div>
+			)}
+			{rejected && (
+				<div className='absolute inset-0 flex items-center justify-center text-white bg-black rounded-md z-9 opacity-80 '>
+					<p className='text-lg font-bold'>교환거절</p>
 				</div>
 			)}
 		</section>

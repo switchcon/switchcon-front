@@ -56,7 +56,12 @@ const MyExchange = () => {
 								return (
 									<Link key={gifticon.gifticonId} to={`/exchange/${gifticon.exchangePostId}`}>
 										<Badge>{[gifticon.status]}</Badge>
-										<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'accepted'} />
+										<GiftCard
+											gifticon={gifticon}
+											accepted={gifticon.status === 'accepted'}
+											exchanged={gifticon.status === 'COMPLETE'}
+											rejected={gifticon.status === 'REJECTED'}
+										/>
 										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px] z-10'>
 											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
 											{gifticon.requestCnt}
@@ -74,7 +79,13 @@ const MyExchange = () => {
 									return (
 										<Link key={gifticon.gifticonId} to={`/exchange/${gifticon.exchangePostId}`}>
 											<Badge>{[gifticon.status]}</Badge>
-											<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'exchanged'} />{' '}
+											<GiftCard
+												gifticon={gifticon}
+												accepted={gifticon.status === 'ACCEPTED'}
+												exchanged={gifticon.status === 'COMPLETE'}
+												rejected={gifticon.status === 'REJECTED'}
+											/>
+											{''}
 											{/*교환완료의 경우 오버레이 */}
 											<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
 												<FaCommentAlt className='text-brand-primary-light' size={'18'} />
