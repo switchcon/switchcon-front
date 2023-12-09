@@ -137,6 +137,10 @@ const ExchangePostDetail = () => {
 							<p className='mb-3 font-bold text-medium'>현재까지 교환신청 목록</p>
 							<hr className='mb-2' />
 							<div className='relative flex flex-col gap-2'>
+								{/* {gifticon.reqListDTO.length > 0 &&
+									gifticon.reqListDTO.map((reqGifticon) => {
+										<GiftCard gifticon={reqGifticon} />;
+									})} */}
 								{/* <GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />

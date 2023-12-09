@@ -199,7 +199,6 @@ const GiftconRegisterPage = () => {
 					</AlertDialogContent>
 				</AlertDialog>
 				{/* 기프티콘 등록 요청 후 성공 실패 확인 모달 */}
-
 				<AlertDialog>
 					<AlertDialogTrigger>
 						<Button id='alertDialogButton' className='hidden w-3/5' />

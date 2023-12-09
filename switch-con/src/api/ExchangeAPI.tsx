@@ -56,12 +56,12 @@ export const gifticonExchangePost = async (gifticonId: number, preference: strin
 
 //교환수락
 //교환 요청
-export const gifticonExchangeRequestPost = async (gifticonId: number) => {
+export const gifticonExchangeRequestPost = async (exchangePostId: number, gifticonId: number) => {
 	try {
-		const response = await api.post(`/exchange/{exchangePostId}/request`, { gifticonId });
+		const response = await api.post(`/exchange/${exchangePostId}/request`, { gifticonId });
 		return response.data.status;
 	} catch (error) {
-		console.error('Error during DELETE request:', error);
+		console.error('Error during gifticonExchangeRequestPost', error);
 		throw error;
 	}
 };
