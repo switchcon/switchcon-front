@@ -10,6 +10,7 @@ const api = axios.create({
 });
 
 // 전체 기프티콘 조회
+
 export const getAllGifticon = async (sortType) => {
 	//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
 	try {
@@ -22,6 +23,7 @@ export const getAllGifticon = async (sortType) => {
 };
 
 //상세 기프티콘 조회
+
 export const getGifticon = async (gifticonId: number) => {
 	try {
 		const response = await api.get(`/gifticon/${gifticonId}`);
@@ -58,10 +60,10 @@ export const ocrPost = async (base64Image: string) => {
 			gifticonImg: base64Image,
 		});
 		console.log('ocr', response.data);
-		return response.data.data;
+		return response.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
-		throw error;
+		return error.response.status;
 	}
 };
 
@@ -71,7 +73,6 @@ export const gifticonDelete = async (gifticonId: number) => {
 		const response = await api.delete(`/gifticon/${gifticonId}`);
 		return response.data.status;
 	} catch (error) {
-		console.error('Error during DELETE request:', error);
-		throw error;
+		return error.response.status;
 	}
 };

@@ -4,6 +4,7 @@ import { ExReq } from '@get/ExReq';
 import { gifticonAll } from '@get/gifticonAll';
 import { gifticonExAll } from '@get/gifticonExAll';
 import { userInfo } from '@get/userInfo';
+import { gifticonPost } from '@post/gifticonPost';
 import axios from 'axios';
 
 // import { gifticonExReqDelete } from 'delete/gifticonExReqDelete';
@@ -36,6 +37,12 @@ const Landing = () => {
 			<Button onClick={() => gifticonAll('expiringSoon')}>gifticonAll get test</Button>
 			<Button onClick={ExPost}>ExPost get test</Button>
 			<Button onClick={ExReq}>ExReq get test</Button>
+			<Button
+				onClick={() => gifticonPost('/images/image_url_2.jpg', '2', '2', '2', '2', '2', '2024-11-29', 10000, true)}
+			>
+				gifticonPost post test
+			</Button>
+
 			{/* <Button onClick={() => gifticonExReqDelete(6, 6)}>gifticonExReqDelete delete test</Button> */}
 		</div>
 

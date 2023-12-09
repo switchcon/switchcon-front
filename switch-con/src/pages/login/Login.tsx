@@ -1,11 +1,13 @@
 /* eslint-disable */ //warning 무시
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Form, Wrapper } from '@components/ui/Common';
 import { styled } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginApi } from '@api/UserAPI';
+import { getUserInfo, loginApi } from '@api/UserAPI';
 
 import { Button } from '@components/ui/button';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userInfo } from '@lib/state';
 
 const CustomLink = styled(Link)`
 	margin-top: 20px;
@@ -23,6 +25,8 @@ const CustomLink = styled(Link)`
 const Login = () => {
 	const [accountId, setId] = useState('');
 	const [password, setPW] = useState('');
+	const setUserInfo = useSetRecoilState(userInfo); //유저 Id 정보 전역관리를 위함
+
 	const router = useNavigate();
 
 	const onChangeID = (e) => {
@@ -34,7 +38,9 @@ const Login = () => {
 
 	const onClick = async () => {
 		const result = await loginApi(accountId, password);
-		console.log(result);
+		const userInformation = await getUserInfo();
+		// 유저 정보 전역변수 업데이트
+		setUserInfo(userInformation);
 		router('/home');
 	};
 
