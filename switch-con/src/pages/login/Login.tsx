@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Input, Form, Wrapper } from '@components/ui/Common';
 import { styled } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserInfo, loginApi } from '@api/UserAPI';
+import { getUserInfo, loginApi } from '@api/UserApi';
 
 import { Button } from '@components/ui/button';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -44,7 +44,6 @@ const Login = () => {
 		setUserInfo(userInformation);
 		router('/home');
 	};
-	
 
 	return (
 		<Wrapper>

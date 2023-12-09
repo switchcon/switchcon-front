@@ -62,12 +62,22 @@ export const signUp = async (accountId: string, password: string, checkPassword:
 	return result.data;
 };
 
-<<<<<<< HEAD
 //사용자 정보조회
 export const getUserInfo = async () => {
 	try {
 		const result = await axios.get(`${BASE_URL}/mypage/info`, {
-=======
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('access')}`,
+				'Content-Type': 'application/json',
+			},
+		});
+		return result.data.data;
+	} catch (error) {
+		console.error('Error during get userInfo request:', error);
+		throw error;
+	}
+};
+
 //교환 등록글 조회
 export const exchangePost = async () => {
 	try {
@@ -89,7 +99,6 @@ export const exchangePost = async () => {
 export const exchangeRequest = async () => {
 	try {
 		const result = await axios.get(`${BASE_URL}/mypage/exchangeRequests`, {
->>>>>>> 5ec37741374faa190aebe6c17592e36fef2a5987
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem('access')}`,
 				'Content-Type': 'application/json',
@@ -97,11 +106,7 @@ export const exchangeRequest = async () => {
 		});
 		return result.data.data;
 	} catch (error) {
-<<<<<<< HEAD
-		console.error('Error during get userInfo request:', error);
-=======
 		console.error('Error during exchangeRequest request:', error);
->>>>>>> 5ec37741374faa190aebe6c17592e36fef2a5987
 		throw error;
 	}
 };

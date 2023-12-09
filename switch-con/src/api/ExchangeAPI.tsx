@@ -54,11 +54,7 @@ export const gifticonExchangePost = async (gifticonId: number, preference: strin
 	}
 };
 
-<<<<<<< HEAD
 //교환수락
-=======
-
->>>>>>> 5ec37741374faa190aebe6c17592e36fef2a5987
 //교환 요청
 export const gifticonExchangeRequestPost = async (gifticonId: number) => {
 	try {
