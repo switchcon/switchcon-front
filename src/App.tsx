@@ -19,7 +19,7 @@ const App = () => {
 		<RecoilRoot>
 			<Routes>
 				{/*랜딩페이지*/}
-				<Route path='/' element={<Landing />} />
+				<Route path='/' element={<Login />} />
 				{/*홈- 내가 등록한 기프티콘 보는 곳 */}
 				<Route path='/login' element={<Login />} />
 				<Route path='/signup' element={<Signup />} />
