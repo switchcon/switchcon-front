@@ -16,8 +16,11 @@ import {
 import { Button } from '@components/ui/button';
 import { getAllGifticon } from '@api/GiftconAPI';
 import { gifticonExchangePost } from '@api/ExchangeAPI';
+import { useNavigate } from 'react-router-dom';
 
 const ExchangePostCreate = () => {
+	const router = useNavigate();
+
 	const [giftcons, setGiftcons] = useState([]);
 	const [showAlertModal, setShowAlertModal] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
@@ -54,7 +57,12 @@ const ExchangePostCreate = () => {
 			console.error(error);
 		}
 	};
-
+	const onClickModal = () => {
+		setShowAlertModal(false); //postReq가 정상요청되었으면 /home 으로 이동, 기프티콘 등록실패일 경우 모달창만 닫기.
+		if (alertMessage === '교환게시글을 등록했습니다.') {
+			router('/exchange-home');
+		}
+	};
 	return (
 		<div className='pb-6 '>
 			<Header headline='교환 기프티콘 등록' />
@@ -115,7 +123,7 @@ const ExchangePostCreate = () => {
 						</AlertDialogHeader>
 						<AlertDialogFooter>
 							<AlertDialogAction asChild>
-								<Button onClick={() => setShowAlertModal(false)}>확인</Button>
+								<Button onClick={onClickModal}>확인</Button>
 							</AlertDialogAction>
 						</AlertDialogFooter>
 					</AlertDialogContent>

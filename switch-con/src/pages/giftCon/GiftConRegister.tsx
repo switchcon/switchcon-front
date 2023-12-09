@@ -184,7 +184,7 @@ const GiftconRegisterPage = () => {
 				)}
 				<AlertDialog>
 					<AlertDialogTrigger>
-						<Button className='w-3/5 '>기프티콘 등록</Button>
+						<Button className='px-8 mt-4 ml-14 full'>기프티콘 등록</Button>
 					</AlertDialogTrigger>
 					<AlertDialogContent>
 						<AlertDialogHeader>
