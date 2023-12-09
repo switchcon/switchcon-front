@@ -63,7 +63,7 @@ export const ocrPost = async (base64Image: string) => {
 		return response.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
-		return error.response.request.status;
+		return error.response.status;
 	}
 };
 
@@ -73,7 +73,6 @@ export const gifticonDelete = async (gifticonId: number) => {
 		const response = await api.delete(`/gifticon/${gifticonId}`);
 		return response.data.status;
 	} catch (error) {
-		console.error('Error during DELETE request:', error);
-		throw error;
+		return error.response.status;
 	}
 };
