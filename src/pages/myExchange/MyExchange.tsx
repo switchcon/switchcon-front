@@ -8,8 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
 import { Badge } from '@components/ui/badge';
 
-import { exchangePost, exchangeRequest } from '@api/UserAPI';
-
+import { exchangePost, exchangeRequest } from '@api/UserApi';
 
 const MyExchange = () => {
 	const [giftcon, setGiftcons] = useState([]);
@@ -58,11 +57,7 @@ const MyExchange = () => {
 						<div className='flex flex-col'>
 							{giftcon.map((gifticon) => {
 								return (
-									<Link
-										style={gifticon.status != 'COMPLETE' ? {} : { pointerEvents: 'none' }}
-										key={gifticon.gifticonId}
-										to={`/exchange/${gifticon.exchangePostId}`}
-									>
+									<Link key={gifticon.gifticonId} to={`/exchange/${gifticon.exchangePostId}`}>
 										<Badge>{[gifticon.status]}</Badge>
 										<GiftCard
 											gifticon={gifticon}
