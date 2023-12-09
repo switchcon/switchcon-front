@@ -45,6 +45,7 @@ export const gifticonExchangeDelete = async (exchangePostId: number) => {
 //교환 게시물 등록
 export const gifticonExchangePost = async (gifticonId: number, preference: string) => {
 	try {
+		console.log('gifticonId', gifticonId, preference);
 		const response = await api.post(`/exchange`, { gifticonId, preference });
 		return response.data.status;
 	} catch (error) {

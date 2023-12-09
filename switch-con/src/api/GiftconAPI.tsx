@@ -60,10 +60,10 @@ export const ocrPost = async (base64Image: string) => {
 			gifticonImg: base64Image,
 		});
 		console.log('ocr', response.data);
-		return response.data.data;
+		return response.data;
 	} catch (error) {
 		console.error('ocrPost request error', error);
-		throw error;
+		return error.response.request.status;
 	}
 };
 

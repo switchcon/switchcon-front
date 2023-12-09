@@ -49,8 +49,14 @@ const GiftconRegisterPage = () => {
 				const base64Image = reader.result as string;
 				const base64Data = base64Image.split(',')[1];
 				const ocrAnalysis = await ocrPost(base64Data);
-				console.log(ocrAnalysis);
-				setAnalyzedGifticon(ocrAnalysis);
+				console.log('response', ocrAnalysis);
+				if (ocrAnalysis.status === 200) {
+					setAnalyzedGifticon(ocrAnalysis.data);
+				} else {
+					console.log('ocr 에러');
+					setAlertMessage('유효하지 않은 기프티콘입니다. (유효기간 만료)');
+					setShowAlertModal(true);
+				}
 			};
 		} catch (error) {
 			console.error('Ocr test fail');
@@ -105,6 +111,7 @@ const GiftconRegisterPage = () => {
 			const alertDialogButton = document.getElementById('alertDialogButton');
 			if (alertDialogButton) {
 				alertDialogButton.click();
+				console.log(showAlertModal);
 			}
 		}
 	}, [showAlertModal]);
@@ -188,23 +195,22 @@ const GiftconRegisterPage = () => {
 							</AlertDialogContent>
 						</AlertDialog>
 						{/* 기프티콘 등록 요청 후 성공 실패 확인 모달 */}
-						{showAlertModal && (
-							<AlertDialog>
-								<AlertDialogTrigger>
-									<Button id='alertDialogButton' className='hidden w-3/5' />
-								</AlertDialogTrigger>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										<AlertDialogTitle> {AlertMessage}</AlertDialogTitle>
-									</AlertDialogHeader>
-									<AlertDialogFooter>
-										<AlertDialogAction asChild>
-											<Button onClick={onClickModal}>확인</Button>
-										</AlertDialogAction>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialog>
-						)}
+
+						<AlertDialog>
+							<AlertDialogTrigger>
+								<Button id='alertDialogButton' className='hidden w-3/5' />
+							</AlertDialogTrigger>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									<AlertDialogTitle> {AlertMessage}</AlertDialogTitle>
+								</AlertDialogHeader>
+								<AlertDialogFooter>
+									<AlertDialogAction asChild>
+										<Button onClick={onClickModal}>확인</Button>
+									</AlertDialogAction>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
 					</section>
 				) : (
 					<section className='px-2 py-3 text-sm bg-white rounded-md'>기프티콘을 등록해주세요!</section>

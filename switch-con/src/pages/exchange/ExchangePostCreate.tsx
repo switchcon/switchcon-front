@@ -14,7 +14,6 @@ import {
 	AlertDialogTrigger,
 } from '@components/ui/alert-dialog';
 import { Button } from '@components/ui/button';
-import { Link } from 'react-router-dom';
 import { getAllGifticon } from '@api/GiftconAPI';
 import { gifticonExchangePost } from '@api/ExchangeAPI';
 
@@ -22,6 +21,8 @@ const ExchangePostCreate = () => {
 	const [giftcons, setGiftcons] = useState([]);
 	const [showAlertModal, setShowAlertModal] = useState(false);
 	const [alertMessage, setAlertMessage] = useState('');
+	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
+
 	const fetchGiftcons = async (sortType: string) => {
 		try {
 			const giftcons = await getAllGifticon(sortType);
@@ -36,8 +37,6 @@ const ExchangePostCreate = () => {
 		//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
 		fetchGiftcons('latest');
 	}, []);
-
-	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -54,8 +53,6 @@ const ExchangePostCreate = () => {
 			setShowAlertModal(true);
 			console.error(error);
 		}
-
-		console.log('Form submitted with gift icon:', selectedGiftIcon);
 	};
 
 	return (
@@ -71,8 +68,8 @@ const ExchangePostCreate = () => {
 							<GiftCard
 								key={gifticon.gifticonId}
 								gifticon={gifticon}
-								onClick={() => setSelectedGiftIcon(gifticon.gifticonId)}
-								selected={selectedGiftIcon === gifticon.gifticonId}
+								onClick={() => setSelectedGiftIcon(gifticon)}
+								selected={selectedGiftIcon?.gifticonId === gifticon.gifticonId}
 							>
 								<input type='radio' value={gifticon.gifticonId.toString()} hidden />
 							</GiftCard>
@@ -82,7 +79,10 @@ const ExchangePostCreate = () => {
 			</main>
 			<AlertDialog>
 				<AlertDialogTrigger>
-					<button className='fixed bottom-4 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'>
+					<button
+						disabled={!selectedGiftIcon}
+						className='fixed bottom-4 translate-x-[200px] hover:bg-brand-primary-light hover:ring hover:ring-[#7cd6a5] hover:ring-offset-0 px-8 py-2 font-bold text-white rounded-full bg-brand-primary-normal'
+					>
 						교환 등록
 					</button>
 				</AlertDialogTrigger>
