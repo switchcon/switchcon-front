@@ -30,8 +30,8 @@ const ExchangePostCreate = () => {
 		try {
 			const giftcons = await getAllGifticon(sortType);
 			//active인 기프티콘만 등록가능하도록 리스트업.abs
-			// const activeGifticons = giftcons.filter((item) => item.active == true);
-			setGiftcons(giftcons);
+			const activeGifticons = giftcons.filter((item) => item.active == true);
+			setGiftcons(activeGifticons);
 		} catch (error) {
 			console.error(error);
 		}

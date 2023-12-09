@@ -18,25 +18,9 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-const giftcons = {
-	exchangePost_id: 1,
-	gifticon_img: '/images/image_url_1.jpg',
-	category: '음료',
-	store: '스타벅스',
-	product: '아메리카노',
-	expiration_date: '2024-01-01',
-	barcode_num: '1234567890',
-	price: 5000,
-	is_used: false,
-	is_active: true,
-	created_at: '2023-11-22',
-	modfied_at: '2023-11-22',
-	exchangeReq_count: 3,
-};
-
 const ExchangePostDetail = () => {
 	const { id } = useParams();
-	//console.log('post ID', id);
+
 	//id값으로 교환상세페이지 데이터 호출
 	const [gifticon, setGifticon] = useState(null); //상세페이지 데이터
 	const current_memberId = useRecoilValue(getUserId); //현재 유저의 ID
@@ -168,7 +152,7 @@ const ExchangePostDetail = () => {
 								</AlertDialog>
 							) : (
 								<Button className='mt-4 mb-2'>
-									<Link to={`/exchange-request/${giftcons.exchangePost_id}`}>교환 신청</Link>
+									<Link to={`/exchange-request/${id}`}>교환 신청</Link>
 								</Button>
 							)}
 						</div>
