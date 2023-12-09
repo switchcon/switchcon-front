@@ -4,7 +4,11 @@ import { Input, Form, Wrapper } from '@components/ui/Common';
 import { styled } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { getUserInfo, loginApi } from '@api/UserApi';
+
+import { getUserInfo, loginApi } from '@api/UserAPI';
+
+
+
 
 import { Button } from '@components/ui/button';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
