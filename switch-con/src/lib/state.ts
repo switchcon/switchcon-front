@@ -1,5 +1,7 @@
 import { atom, selector } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
+const { persistAtom } = recoilPersist();
 interface UserInfo {
 	memberId: number;
 	nickname: string;
@@ -15,6 +17,7 @@ export const userInfo = atom<UserInfo>({
 		exchangeCoin: 0,
 		notifyOn: true,
 	},
+	effects_UNSTABLE: [persistAtom],
 });
 
 export const getUserId = selector({
