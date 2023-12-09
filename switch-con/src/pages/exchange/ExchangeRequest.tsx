@@ -1,7 +1,7 @@
 'use client';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -14,6 +14,8 @@ import {
 	AlertDialogTrigger,
 } from '@components/ui/alert-dialog';
 import { Button } from '@components/ui/button';
+import { gifticonExchangeRequestPost } from '@api/ExchangeAPI';
+import { getAllGifticon } from '@api/GiftconAPI';
 
 const giftcons = [
 	{
@@ -58,27 +60,68 @@ const giftcons = [
 		created_at: '2023-11-24',
 		modfied_at: '2023-11-24',
 	},
-	{
-		exchangePost_id: 4,
-		gifticon_img: '/images/image_url_3.jpg',
-		category: '푸드',
-		store: '피자헛',
-		product: '슈퍼슈프림 피자',
-		expiration_date: '2024-03-30',
-		barcode_num: '3456789012',
-		price: 20000,
-		is_used: false,
-		is_active: true,
-		created_at: '2023-11-24',
-		modfied_at: '2023-11-24',
-	},
+	// {
+	// 	exchangePost_id: 4,
+	// 	gifticon_img: '/images/image_url_3.jpg',
+	// 	category: '푸드',
+	// 	store: '피자헛',
+	// 	product: '슈퍼슈프림 피자',
+	// 	expiration_date: '2024-03-30',
+	// 	barcode_num: '3456789012',
+	// 	price: 20000,
+	// 	is_used: false,
+	// 	is_active: true,
+	// 	created_at: '2023-11-24',
+	// 	modfied_at: '2023-11-24',
+	// },
 ];
 const ExchangeRequest = () => {
 	const [selectedGiftIcon, setSelectedGiftIcon] = useState(null);
+
+	const [giftcons, setGiftcons] = useState([]);
+	const fetchGiftcons = async (sortType: string) => {
+		try {
+			const giftcons = await getAllGifticon(sortType);
+			setGiftcons(giftcons);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		//sortType: latest (최신등록순), expiringSoon(유효기간임박순), highPrice(높은 가격순), lowPrice(낮은가격순)
+		fetchGiftcons('latest');
+	}, []);
+
+	const handleGiftIconSelect = (_giftIconId, giftIconData) => {
+		setSelectedGiftIcon(giftIconData);
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		// const response = await
 		console.log('Form submitted with gift icon:', selectedGiftIcon);
+
+		if (!selectedGiftIcon) {
+			// Handle case where no gifticon is selected
+			console.error('Please select a gifticon before submitting.');
+			return;
+		}
+		try {
+			// Call the exchange request function with the selected gifticon's ID
+			const responseStatus = await gifticonExchangeRequestPost(selectedGiftIcon.exchangePostId);
+
+			if (responseStatus >= 200 && responseStatus < 300) {
+				// Successful exchange request
+				console.log('Exchange request successful');
+				// Add any additional logic or navigation here
+			} else {
+				// Handle error response
+				console.error('Exchange request failed:', responseStatus);
+			}
+		} catch (error) {
+			// Handle network or other errors
+			console.error('Error during exchange request:', error);
+		}
 	};
 	return (
 		<div className='pb-6 '>
@@ -88,15 +131,27 @@ const ExchangeRequest = () => {
 					<p className='font-semibold'>내 기프티콘</p>
 				</div>
 				<form onSubmit={handleSubmit} id='exchange_request' className='flex flex-col gap-2'>
+					{/* {giftcons.map((gifticon) => {
+						return (
+							<GiftCard
+								key={gifticon.gifticonId}
+								gifticon={gifticon}
+								onClick={() => handleGiftIconSelect(gifticon.gifticonId)} // 변경된 부분
+								selected={selectedGiftIcon === gifticon.gifticonId}
+							>
+								<input type='radio' value={gifticon.gifticonId.toString()} hidden />
+							</GiftCard>
+						);
+					})} */}
 					{giftcons.map((gifticon) => {
 						return (
 							<GiftCard
 								key={gifticon.exchangePost_id}
 								gifticon={gifticon}
-								onClick={() => setSelectedGiftIcon(gifticon.exchangePost_id)}
+								onClick={() => handleGiftIconSelect(gifticon.exchangePost_id, gifticon)}
 								selected={selectedGiftIcon === gifticon.exchangePost_id}
 							>
-								<input type='radio' value={gifticon.exchangePost_id.toString()} hidden />
+								{/* <input type='radio' value={gifticon.exchangePost_id.toString()} hidden /> */}
 							</GiftCard>
 						);
 					})}

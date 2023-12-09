@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GiftCard from '@components/ui/GiftCard';
 import Header from '@components/ui/Header';
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs';
 import Footer from '@components/ui/Footer';
 import { Badge } from '@components/ui/badge';
+import { exchangePost, exchangeRequest } from '@api/UserAPI';
 
 const giftcons = [
 	{
@@ -69,7 +70,36 @@ const status = {
 	accepted: '수락됨',
 	rejected: '거절됨',
 };
+
 const MyExchange = () => {
+	const [giftcon, setGiftcons] = useState([]);
+	const fetchExchangePost = async () => {
+		try {
+			const giftcon = await exchangePost();
+			setGiftcons(giftcon);
+			console.log(giftcon);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		fetchExchangePost();
+	}, []);
+
+	const [gifticons, setGifticons] = useState([]);
+	const fetchExchangeRequest = async () => {
+		try {
+			const gifticons = await exchangeRequest();
+			setGifticons(gifticons);
+			console.log(gifticons);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+	useEffect(() => {
+		fetchExchangeRequest();
+	}, []);
+
 	return (
 		<>
 			<Header headline='내 콘' navigaterOff>
@@ -84,34 +114,37 @@ const MyExchange = () => {
 				<main className='px-6'>
 					<TabsContent value='my_post'>
 						<div className='flex flex-col'>
-							{giftcons.map((gifticon) => {
+							{giftcon.map((gifticon) => {
 								return (
-									<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
-										<GiftCard exchanged={gifticon.status === 'accepted'} gifticon={gifticon} />
+									<Link key={gifticon.gifticonId} to={`/exchange/${gifticon.exchangePostId}`}>
+										<Badge>{[gifticon.status]}</Badge>
+										<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'accepted'} />
 										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px] z-10'>
 											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
-											{gifticon.exchangeReq_count}
+											{gifticon.requestCnt}
 										</div>
 									</Link>
 								);
 							})}
+							{/* {giftcons} */}
 						</div>
 					</TabsContent>
 					<TabsContent value='request_post'>
 						<div className='flex flex-col'>
-							{giftcons.map((gifticon) => {
-								return (
-									<Link key={gifticon.exchangePost_id} to={`/exchange/${gifticon.exchangePost_id}`}>
-										<Badge>{status[gifticon.status]}</Badge>
-										<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'exchanged'} />{' '}
-										{/*교환완료의 경우 오버레이 */}
-										<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
-											<FaCommentAlt className='text-brand-primary-light' size={'18'} />
-											{gifticon.exchangeReq_count}
-										</div>
-									</Link>
-								);
-							})}
+							{gifticons &&
+								gifticons.map((gifticon) => {
+									return (
+										<Link key={gifticon.gifticonId} to={`/exchange/${gifticon.exchangePostId}`}>
+											<Badge>{[gifticon.status]}</Badge>
+											<GiftCard gifticon={gifticon} exchanged={gifticon.status === 'exchanged'} />{' '}
+											{/*교환완료의 경우 오버레이 */}
+											<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
+												<FaCommentAlt className='text-brand-primary-light' size={'18'} />
+												{gifticon.requestCnt}
+											</div>
+										</Link>
+									);
+								})}
 						</div>
 					</TabsContent>
 				</main>

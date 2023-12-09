@@ -46,6 +46,7 @@ const ExchangePostDetail = () => {
 		try {
 			const data = await getGifticonDetailPost(parseInt(id, 10));
 			setGifticon(data);
+			console.log('data ', data);
 		} catch (error) {
 			console.error();
 		}
@@ -98,7 +99,7 @@ const ExchangePostDetail = () => {
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>유효기간</p>
-									<p className='text-sm'>{gifticon.expiration_date}</p>
+									<p className='text-sm'>{gifticon.expireDate}</p>
 								</div>
 								<div className='grid grid-cols-2'>
 									<p className='text-sm font-semibold text-green-900'>제품 금액</p>
@@ -136,10 +137,10 @@ const ExchangePostDetail = () => {
 							<p className='mb-3 font-bold text-medium'>현재까지 교환신청 목록</p>
 							<hr className='mb-2' />
 							<div className='relative flex flex-col gap-2'>
+								{/* <GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />
 								<GiftCard gifticon={giftcons} hoverOff />
-								<GiftCard gifticon={giftcons} hoverOff />
-								<GiftCard gifticon={giftcons} hoverOff />
+								<GiftCard gifticon={giftcons} hoverOff /> */}
 							</div>
 							{/* 자신의 게시글이면 교환 수락 버튼, 아니면 교환 신청버튼 */}
 							{gifticon.memberId === current_memberId ? (
