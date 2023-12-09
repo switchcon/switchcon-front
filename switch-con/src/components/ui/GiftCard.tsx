@@ -58,7 +58,7 @@ const GiftCard = ({
 
 				<p className='text-sm font-semibold text-green-950'>{gifticon.expireDate}</p>
 
-				<p className='text-sm font-semibold text-green-950'>{gifticon.expirationDdate}</p>
+				{/* <p className='text-sm font-semibold text-green-950'>{gifticon.expirationDdate}</p> */}
 
 				<p className='text-sm font-semibold text-green-800'>약 {gifticon.price} 원</p>
 				<div>{children}</div>

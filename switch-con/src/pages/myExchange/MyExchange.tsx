@@ -44,12 +44,14 @@ const MyExchange = () => {
 				<IoIosSearch size={'20'} />
 				<IoMdNotificationsOutline size={'20'} className='ml-3 mr-4' />
 			</Header>
+
 			<Tabs defaultValue='my_post' className='flex flex-col justify-center gap-2'>
 				<TabsList className='flex gap-4 px-2 mt-16 mb-4'>
 					<TabsTrigger value='my_post'>내 교환등록 글</TabsTrigger>
 					<TabsTrigger value='request_post'>교환신청 글</TabsTrigger>
 				</TabsList>
 				<main className='px-6'>
+					{/* 교환등록 */}
 					<TabsContent value='my_post'>
 						<div className='flex flex-col'>
 							{giftcon.map((gifticon) => {
@@ -71,6 +73,7 @@ const MyExchange = () => {
 							})}
 							{/* {giftcons} */}
 						</div>
+						{/* 교환신청페이지 */}
 					</TabsContent>
 					<TabsContent value='request_post'>
 						<div className='flex flex-col'>
@@ -87,10 +90,12 @@ const MyExchange = () => {
 											/>
 											{''}
 											{/*교환완료의 경우 오버레이 */}
-											<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
-												<FaCommentAlt className='text-brand-primary-light' size={'18'} />
-												{gifticon.requestCnt}
-											</div>
+											{gifticon.status === 'COMPLETE' && (
+												<div className='h-[15px] relative flex items-center gap-2 bottom-8 left-[285px]'>
+													<FaCommentAlt className='text-brand-primary-light' size={'18'} />
+													{gifticon.requestCnt}
+												</div>
+											)}
 										</Link>
 									);
 								})}

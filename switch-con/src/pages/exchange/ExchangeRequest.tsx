@@ -32,8 +32,7 @@ const ExchangeRequest = () => {
 			const giftcons = await getAllGifticon(sortType);
 			//교환가능 상태인 기프티콘만 목록에 띄우도록
 			const availableGiftcons = giftcons.filter((giftcon) => giftcon.active == true && giftcon.used == false);
-			setGiftcons(giftcons);
-			console.log('giftcons', giftcons);
+			setGiftcons(availableGiftcons);
 		} catch (error) {
 			console.error(error);
 		}

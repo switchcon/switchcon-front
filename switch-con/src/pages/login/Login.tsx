@@ -39,7 +39,6 @@ const Login = () => {
 	const onClick = async () => {
 		const result = await loginApi(accountId, password);
 		const userInformation = await getUserInfo();
-		console.log('userInfor', userInformation);
 		// 유저 정보 전역변수 업데이트
 		setUserInfo(userInformation);
 		router('/home');

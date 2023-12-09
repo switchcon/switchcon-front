@@ -55,6 +55,16 @@ export const gifticonExchangePost = async (gifticonId: number, preference: strin
 };
 
 //교환수락
+export const gifiticonExchangeAccept = async (exchangePostId: number, exchangeRequestId: number) => {
+	try {
+		const response = await api.post(`/exchange/${exchangePostId}/${exchangeRequestId}/success`);
+		return response.data.status;
+	} catch (error) {
+		console.error('Error during exchangeAccept post ', error);
+		throw error;
+	}
+};
+
 //교환 요청
 export const gifticonExchangeRequestPost = async (exchangePostId: number, gifticonId: number) => {
 	try {
