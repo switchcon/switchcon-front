@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+	background-color: rgb(238, 238, 238);
+	font-family: 'OTWelcomeRA';
+}
+@font-face {
+	font-family: 'OTWelcomRA';
+	src: url('https://cdn.jsdelivr.net/gh/project/noonfonts_2110@1.0/OTWelcomRA.woff2') format('woff2');
+	font-weight: normal;
+	font-size: normal;
+} */
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
